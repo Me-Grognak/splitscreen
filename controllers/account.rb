@@ -70,8 +70,10 @@ class AccountController < ApplicationController
 
       if user
         session[:current_user] = user
-        @message = "Welcome back, " + params[:user_name]
-        redirect "/"
+        self.set_message("Welcome back, " + params[:user_name])
+        self.set_logged("block")
+        self.set_signup("none")
+        redirect "/profile/" + params[:user_name]
       else
         @message = "Invalid username or password"
         erb :login
