@@ -219,5 +219,69 @@ select:focus {
 }
 
 @media (min-width: 600px) {
+  .pro_container {
+    width: 90%;
+    margin: 0 auto;
+  }
 
+  .profile_img {
+    width: 280px;
+    height: 240px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: pink;
+    z-index: 999;
+    float: left;
+  }
+
+  .slideshow {
+    float: right;
+    width: 960px;
+    height: 400px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .slideshow_wrapper {
+    overflow: hidden;
+  }
+
+  #slider {
+    position: relative;
+    height: 380px;
+    padding: 0;
+  }
+
+  #slider li {
+    max-width: 100%;
+    float: left;
+    list-style: none;
+  }
+
+  .contents {
+    clear: left;
+  }
+
+  .profile_props {
+    width: 270px;
+    height: 610px;
+    margin-left: 6px;
+    margin-top: -10px;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    float: left;
+  }
+
+  .profile_comments {
+    float: right;
+    background-color: white;
+    width: 960px;
+    height: 600px;
+    border-radius: 10px;
+    margin-top: 40px;
+  }
 }

@@ -1,5 +1,101 @@
-<%= session[:message] %>
+<section class="pro_container">
+  <article class="row">
+    <div class="profile_img" style="background-image: url('https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-circle-512.png'); background-size: cover;">
+    </div>
+    <div class="slideshow">
+      <div class="slideshow_wrapper">
+        <ul id="slider">
+          <li><img src="http://4d663a369f9f03c3c61e-870e77779efd63f7bd6c2ee08d8cfae6.r2.cf1.rackcdn.com/images/gyO04SLxg8Fq.840x0.Vdef9Kkm.jpg" alt="" /></li>
+          <li><img src="http://www.gameondaily.com/wordpress/wp-content/uploads/2015/05/2864036-assassins_creed_syndicate_gang_leader-1200x666.jpg" alt="" /></li>
+          <li><img src="http://www.gamerheadlines.com/wp-content/uploads/2015/05/AC-Syndicate-111.jpg" alt="" /></li>
+        </ul>
+      </div>
+    </div>
+  </article>
+  <article class="row contents" style="z-index: -1; position: relative;">
+    <div class="profile_props">
+
+    </div>
+    <div class="profile_comments">
+
+    </div>
+  </article>
+
+
+</section>
+
+<!-- <%= session[:message] %> -->
 <script type="text/javascript">
+
+  var ul;
+  var listItems;
+  var numOfImgs;
+  var imgWidth;
+  var currentImage;
+
+  function init() {
+    ul = document.getElementById('slider');
+    listItems = ul.children;
+    numOfImgs = listItems.length;
+    imgWidth = listItems[0].children[0].offsetWidth;
+    ul.style.width = parseInt(imgWidth * numOfImgs) + "px";
+    slider(ul);
+  }
+
+  function slider(ul) {
+    animate({
+      delay : 17,
+      duration : 3000,
+      delta : function(p) {
+        return Math.max(0, -1 + 2 * p);
+      },
+      step : function(delta) {
+        ul.style.left = '-' + parseInt(currentImage * imgWidth + delta * imgWidth) + "px";
+      },
+      callback : function() {
+        currentImage++;
+        if (currentImage < numOfImgs - 1) {
+          slider(ul);
+        } else {
+          var leftPosition = (numOfImgs - 1 * imgWidth);
+          setTimeout(function() {goBack(leftPosition)}, 2000);
+          setTimeout(function() {slider(ul)}, 4000);
+        }
+      }
+    });
+  }
+
+  function goBack(leftposition) {
+    currentImage = 0;
+    var id = setInterval(function() {
+      if (leftposition >= 0) {
+        ul.style.left = '-' + parseInt(leftposition) + "px";
+        leftposition -= imgWidth / 10;
+      } else {
+        clearInterval(id);
+      }
+    });
+  }
+
+  function animate(opts) {
+    var start = new Date;
+    var id = setInterval(function() {
+      var timePassed = new Date - start;
+      var progress = timePassed / opts.duration;
+      if (progress > 1) {
+        progress = 1;
+      }
+      var delta = opts.delta(progress);
+      opts.step(delta);
+      if (progress == 1) {
+        clearInterval(id);
+        opts.callback();
+      }
+    }, opts.delay || 17);
+  }
+
+  window.onload = init();
+
   document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
   document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
 </script>
