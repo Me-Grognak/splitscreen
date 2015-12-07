@@ -18,20 +18,11 @@ class ApplicationController < Sinatra::Base
     session[:signup] = signup
   end
 
-  # def get_message
-  #   return @message
-  # end
-  #
-  # def get_logged
-  #   return @logged
-  # end
-  #
-  # def get_signup
-  #   return @signup
-  # end
-  # @@message = "Default"
-  # @@logged = "none"
-  # @@signup = "block"
+  def resets
+    session[:message] = nil
+    session[:logged] = nil
+    session[:signup] = nil
+  end
 
   ActiveRecord::Base.establish_connection(
     :adapter => "postgresql",
@@ -57,7 +48,6 @@ class ApplicationController < Sinatra::Base
   def authorization_check()
     if session[:current_user] == nil
       return false
-      # redirect "/not_authorized"
     else
       return true
     end

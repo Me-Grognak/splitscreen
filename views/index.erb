@@ -3,7 +3,7 @@
 
 </header><br>
 <div class="header_msg">
-  <%= @message %>
+  <%= session[:message] %>
 </div>
 
 
@@ -13,7 +13,7 @@
     window.location.href = "/register";
   });
 
-  document.getElementById('logout_btn').style.display = "<%= @logged %>";
-  document.getElementById('register_btn').style.display = "<%= @signup %>";
+  document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
+  document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
 
 </script>

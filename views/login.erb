@@ -3,7 +3,7 @@
       <h1>Sign In</h1>
     </div>
     <div class="form_fields invalid">
-      <%= @message %>
+      <%= session[:message] %>
     </div>
     <form action="/login" method="post">
       <div class="form_fields">
@@ -26,6 +26,6 @@
     window.location.href = "/";
   });
 
-  document.getElementById('logout_btn').style.display = "<%= @logged %>";
-  document.getElementById('register_btn').style.display = "<%= @signup %>";
+  document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
+  document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
 </script>
