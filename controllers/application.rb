@@ -3,6 +3,27 @@ class ApplicationController < Sinatra::Base
   require "bundler"
   Bundler.require
 
+  enable :sessions
+
+  def set_message(message)
+    session[:message] = message
+    # <%= session[:message] %>
+  end
+
+  def set_logged(logged)
+    session[:logged] = logged
+  end
+
+  def set_signup(signup)
+    session[:signup] = signup
+  end
+
+  def resets
+    session[:message] = nil
+    session[:logged] = nil
+    session[:signup] = nil
+  end
+
   ActiveRecord::Base.establish_connection(
     :adapter => "postgresql",
     :database => "splitscreen"
@@ -14,8 +35,6 @@ class ApplicationController < Sinatra::Base
   not_found do
     erb :page_not_found
   end
-
-  enable :sessions
 
   def does_user_exist(username)
     user = Account.find_by(user_name: username)
@@ -38,7 +57,6 @@ class ApplicationController < Sinatra::Base
   def authorization_check()
     if session[:current_user] == nil
       return false
-      # redirect "/not_authorized"
     else
       return true
     end
