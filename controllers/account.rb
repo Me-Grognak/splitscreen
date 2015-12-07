@@ -7,7 +7,7 @@ class AccountController < ApplicationController
     erb :index
   end
 
-
+#
 #Register "GET"-----------------------------------------------------------------
   get "/register" do
     if authorization_check()
