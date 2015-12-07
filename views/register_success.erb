@@ -1,0 +1,16 @@
+<div class="header_msg">
+  <h3>Registration Complete!</h3>
+
+  <h1>Thank you for joining SplitScreen</h1>
+
+  <input type="button" id="home_btn" value="Home">
+</div>
+
+<script type="text/javascript">
+  var homeButton = document.getElementById('home_btn');
+  homeButton.addEventListener('click', function() {
+    window.location.href = "/";
+  });
+
+  document.getElementById('logout_btn').style.display = "<%= @logged %>";
+</script>

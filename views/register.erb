@@ -1,0 +1,71 @@
+<section class="register_form">
+  <div class="form_fields">
+      <h1>Register</h1>
+    </div>
+    <div class="form_fields invalid">
+      <%= @message %>
+    </div>
+    <form action="/register" method="post">
+      <div class="form_fields">
+        <input type="text" name="user_name" placeholder="Username">
+      </div>
+      <div class="form_fields">
+        <input type="text" name="user_email" placeholder="Email">
+      </div>
+      <div class="form_fields">
+        <input type="password" name="password" placeholder="Password">
+      </div>
+      <div class="form_fields">
+        <input type="password" name="confirm_password" placeholder="Confirm Password">
+      </div>
+      <div class="form_fields">
+        <input type="submit" id="register_submit" value="Submit">
+        <input type="button" id="cancel_btn" value="Cancel">
+      </div>
+    </form>
+</section>
+
+<script type="text/javascript">
+
+  function valid() {
+    var userName = document.getElementsByName('user_name')[0].value;
+    var userEmail = document.getElementsByName('user_email')[0].value;
+    var password = document.getElementsByName('password')[0].value;
+    var conPassword = document.getElementsByName('confirm_password')[0].value;
+
+    var message = document.getElementsByClassName('invalid')[0];
+
+    if (userName.length == 0) {
+      message.innerText = "You must enter a username";
+      return false;
+    } else if (userEmail.length == 0) {
+      message.innerText = "You must enter a valid email address";
+      return false;
+    } else if (password.length == 0) {
+      message.innerText = "You must enter a password";
+      return false;
+    } else if (conPassword.length == 0) {
+      message.innerText = "You must confirm your password"
+      return false;
+    } else if (conPassword != password) {
+      message.innerText = "Passwords do not match. Please confirm your password";
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  var submitBtn = document.getElementById('register_submit');
+  submitBtn.addEventListener('click', function() {
+    if (!valid()) {
+      event.preventDefault();
+    }
+  });
+
+  var cancelButton = document.getElementById('cancel_btn');
+  cancelButton.addEventListener('click', function() {
+    window.location.href = "/";
+  });
+
+  document.getElementById('logout_btn').style.display = "<%= @logged %>";
+</script>

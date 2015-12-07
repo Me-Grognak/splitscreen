@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/styles/style.css" media="screen" title="no title" charset="utf-8">
+    <title>SplitScreen</title>
+  </head>
+  <body>
+
+      <nav id="navbar">
+        <div class="nav_menu">
+          <input type="button" id="upload_btn" value="UPLOAD image">
+          <input type="button" id="login_btn" value="Login">
+          <input type="button" id="logout_btn" value="Logout">
+        </div>
+      </nav>
+
+    <%= yield %>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </body>
+</html>

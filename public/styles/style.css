@@ -1,0 +1,222 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: #eee;
+}
+
+input {
+  height: 38px;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  font-size: 14px;
+}
+
+input[type="button"], [type="submit"] {
+  cursor: pointer;
+  letter-spacing: .1rem;
+  color: white;
+  height: 38px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 38px;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+input[type="button"]:hover, [type="submit"]:hover {
+  outline: 0;
+}
+
+#login_btn:hover {
+  background-color: rgb(96, 195, 220);
+}
+
+#cancel_btn {
+  background-color: rgb(254, 94, 58);
+}
+
+#cancel_btn:hover {
+  background-color: rgb(242, 82, 46);
+}
+
+#register_submit {
+  background-color: rgb(108, 209, 234);
+  background-color: #98dafc;
+}
+
+#register_submit:hover {
+  background-color: rgb(96, 195, 220);
+}
+
+#upload_btn:hover {
+  background-color: rgb(83, 220, 146);
+}
+
+#register_btn {
+  background-color: rgb(236, 74, 254);
+  background-color: #fff;
+  color: #111;
+}
+
+#register_btn:hover {
+  background-color: #daad86;
+  background-color: #fa7973;
+  color: #fff;
+}
+
+#logout_btn {
+  display: none;
+  float: right;
+  margin: 0 auto;
+  /*margin-top: 4px;*/
+  margin-left: 4px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  height: 38px;
+  padding: 0 30px;
+  border-radius: 4px;
+  /*border: 1px solid #bbb;*/
+  cursor: pointer;
+  box-sizing: border-box;
+  color: white;
+}
+
+.register_form, .login_form {
+  width: 314px;
+  margin: 0 auto;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 6px 10px;
+  box-shadow: none;
+  box-sizing: border-box;
+  border: 1px solid #d1d1d1;
+  background-color: #fff;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0; }
+
+.form_fields {
+  margin: 6%;
+}
+
+.invalid {
+  color: rgb(254, 94, 58);
+}
+
+.header_msg {
+  text-align: center;
+}
+
+/*------------------------- Media Queries ------------------------------------*/
+
+@media (min-width: 320px) {
+  .container {
+    margin: 0;
+    padding: 0;
+    height: 700px;
+  }
+
+  #navbar {
+    height: 82px;
+    margin: 0;
+    padding: .5%;
+    background-color: rgb(236, 74, 254);
+    background-color: rgb(97, 234, 160);
+    background-color: #eee;
+    background-color: #312c32;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .nav_menu {
+    width: 188px;
+    margin: 0 auto;
+  }
+
+  #upload_btn {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: rgb(97, 234, 160);
+    height: 38px;
+    padding: 0 30px;
+    border-radius: 4px;
+    /*border: 1px solid #bbb;*/
+    cursor: pointer;
+    box-sizing: border-box;
+    color: white;
+  }
+
+  #login_btn {
+    width: 116px;
+    margin: 0 auto;
+    margin-top: 4px;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: rgb(108, 209, 234);
+    background-color: #98dafc;
+    height: 38px;
+    padding: 0 30px;
+    border-radius: 4px;
+    /*border: 1px solid #bbb;*/
+    cursor: pointer;
+    box-sizing: border-box;
+    color: white;
+  }
+}
+
+@media (min-width: 480px) {
+
+  #navbar {
+    height: 40px;
+  }
+
+  .nav_menu {
+    float: right;
+    width: auto;
+  }
+
+  #login_btn {
+    margin: inherit;
+    margin-top: inherit;
+    width: inherit;
+    display: inline-block;
+  }
+
+}
+
+@media (min-width: 600px) {
+
+}

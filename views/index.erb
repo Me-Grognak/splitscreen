@@ -1,0 +1,18 @@
+<header class="header_msg">
+  <h1>Welcome to SplitScreen!</h1>
+  <input type="button" id="register_btn" value="Register!">
+</header><br>
+<div class="header_msg">
+  <%= @message %>
+</div>
+
+
+<script type="text/javascript">
+  var regButton = document.getElementById('register_btn');
+  regButton.addEventListener('click', function() {
+    window.location.href = "/register";
+  });
+
+  document.getElementById('logout_btn').style.display = "<%= @logged %>";
+
+</script>
