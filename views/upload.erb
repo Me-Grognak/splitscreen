@@ -1,0 +1,22 @@
+<div class='wrapper'>
+  <div class='upload'>
+    <h1>
+      Upload an Image:
+    </h1>
+    <div class='invalid'>
+      <%= @message %>
+    </div>
+    <br>
+    <form method='POST' action='/image/upload' enctype='multipart/form-data'>
+      <label for='title'>Image Title:</label>
+      <input type='text' name='title' maxlength='50'>
+      <div id='upload-img-wrapper'>
+        <div id='upload-text'>
+          Browse Files
+        </div>
+        <input id='upload-img' type='file' name='pic' accept='image/*'>
+      </div>
+      <input type='submit' value='Upload'>
+    </form>
+  </div>
+</div>

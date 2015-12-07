@@ -6,10 +6,11 @@ class AccountController < ApplicationController
       self.set_logged("block")
       self.set_signup("none")
     end
+    @images = Account_Image.all
     erb :index
   end
 
-#
+
 #Register "GET"-----------------------------------------------------------------
   get "/register" do
     self.resets
@@ -103,4 +104,12 @@ class AccountController < ApplicationController
     erb :logout
   end
 #-------------------------------------------------------------------------------
+
+
+#Upload "GET"-----------------------------------------------------------------
+  get "/upload" do
+    erb :upload
+  end
+#-------------------------------------------------------------------------------
+
 end

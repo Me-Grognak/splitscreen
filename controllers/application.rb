@@ -45,6 +45,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  def does_image_exist(filename)
+    image = Account_Image.find_by(file_name: filename)
+    if image
+      return true
+    else
+      return false
+    end
+  end
+
   def authorization_check()
     if session[:current_user] == nil
       return false
