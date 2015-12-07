@@ -7,6 +7,39 @@
 </div>
 
 
+<div class='gallery_container'>
+  <div class='gallery'>
+    <%@images.each do |image|%>
+      <div id='<%= image.image_path %>' class='post'>
+        <img src='<%="/uploads/images/#{image.image_path}" %>' alt='pic'>
+        <div class='img-overlay'>
+          <div class='pull-top'>
+            User: <%= image.user_name %>
+          </div>
+          <div class='pull-bottom'>
+            <div class='likes'>
+              <div class='like-title'>
+                Likes:
+              </div>
+              <div class='like-count'>
+                <%= image.likes %>
+              </div>
+            </div>
+            <div class='views'>
+              <div class='view-title'>
+                Views:
+              </div>
+              <div class='view-count'>
+                <%= image.views %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
 <script type="text/javascript">
   var regButton = document.getElementById('register_btn');
   regButton.addEventListener('click', function() {

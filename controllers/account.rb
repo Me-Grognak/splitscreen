@@ -4,10 +4,11 @@ class AccountController < ApplicationController
     if authorization_check()
       @logged = "block"
     end
+    @images = Account_Image.all
     erb :index
   end
 
-#
+
 #Register "GET"-----------------------------------------------------------------
   get "/register" do
     if authorization_check()
@@ -94,4 +95,12 @@ class AccountController < ApplicationController
     erb :index
   end
 #-------------------------------------------------------------------------------
+
+
+#Upload "GET"-----------------------------------------------------------------
+  get "/upload" do
+    erb :upload
+  end
+#-------------------------------------------------------------------------------
+
 end
