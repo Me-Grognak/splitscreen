@@ -3,6 +3,7 @@ class AccountController < ApplicationController
   get "/" do
     if authorization_check()
       @logged = "block"
+      @signup = "none"
     end
     erb :index
   end
@@ -50,6 +51,7 @@ class AccountController < ApplicationController
   get "/login" do
     if authorization_check()
       @logged = "block"
+      @signup = "none"
     end
     erb :login
   end

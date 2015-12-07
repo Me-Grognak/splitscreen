@@ -10,5 +10,9 @@ window.onload = function() {
     window.location.href = "/logout";
   });
 
+  var signupButton = document.getElementById('register_btn');
+  signupButton.addEventListener('click', function() {
+    window.location.href = "/register";
+  });
 
 }

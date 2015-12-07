@@ -1,6 +1,6 @@
 <header class="header_msg">
   <h1>Welcome to SplitScreen!</h1>
-  <input type="button" id="register_btn" value="Register!">
+
 </header><br>
 <div class="header_msg">
   <%= @message %>
@@ -14,5 +14,6 @@
   });
 
   document.getElementById('logout_btn').style.display = "<%= @logged %>";
+  document.getElementById('register_btn').style.display = "<%= @signup %>";
 
 </script>

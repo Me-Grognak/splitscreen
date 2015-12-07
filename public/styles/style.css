@@ -57,6 +57,7 @@ input[type="button"]:hover, [type="submit"]:hover {
 }
 
 #register_btn {
+  text-transform: uppercase;
   background-color: rgb(236, 74, 254);
   background-color: #fff;
   color: #111;
