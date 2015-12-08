@@ -235,9 +235,10 @@ footer {
   padding: 30px;
 }
 
-img {
+.gallery img {
   width: 100%;
   height: 100%;
+  border-radius: 10px;
 }
 
 /* -------------------- POST STYLING ------------------------------------ */
@@ -312,6 +313,7 @@ img {
 
 .img-overlay:hover {
   opacity: 1;
+  border-radius: 10px;
 }
 
 
@@ -416,7 +418,7 @@ img {
     height: 240px;
     margin-top: 10px;
     border-radius: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     background-color: pink;
     z-index: 999;
     float: left;
@@ -425,11 +427,12 @@ img {
   .slideshow {
     float: right;
     width: 960px;
-    height: 400px;
+    height: 500px;
     margin-top: 10px;
     background-color: white;
     border-radius: 10px;
     box-sizing: border-box;
+    border: 1px solid #ccc;
   }
 
   .slideshow_wrapper {
@@ -438,14 +441,23 @@ img {
 
   #slider {
     position: relative;
-    height: 380px;
+    height: 420px;
+    width: 880px;
     padding: 0;
+    margin-left: 38px;
   }
 
   #slider li {
     max-width: 100%;
     float: left;
     list-style: none;
+  }
+
+  #slider li img {
+    height: 464px;
+    width: 880px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
   }
 
   .contents {
@@ -461,6 +473,15 @@ img {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     float: left;
+    border: 1px solid #ccc;
+  }
+
+  #props {
+    /*margin-left: 10px;*/
+  }
+
+  #props p {
+    text-align: center;
   }
 
   .profile_comments {
@@ -469,6 +490,7 @@ img {
     width: 960px;
     height: 600px;
     border-radius: 10px;
-    margin-top: 40px;
+    margin-top: 30px;
+    border: 1px solid #ccc;
   }
 }
