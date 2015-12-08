@@ -7,8 +7,8 @@ post '/upload' do
     return erb :upload
   end
   ext = File.extname(params["pic"][:filename])
-  filecount = Dir["public/uploads/images/**/*"].length
-  filepath = (filecount + 1).to_s + ext
+  hex = SecureRandom.hex
+  filepath = hex + ext
 
   #base = Base64.encode64(open(params["pic"][:tempfile]) { |io| io.read})
   pic = Account_Image.new

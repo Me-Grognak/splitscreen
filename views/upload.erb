@@ -10,13 +10,27 @@
     <form method='POST' action='/image/upload' enctype='multipart/form-data'>
       <label for='title'>Image Title:</label>
       <input type='text' name='title' maxlength='50'>
-      <div id='upload-img-wrapper'>
-        <div id='upload-text'>
-          Browse Files
+      <div class='button-holder'>
+        <div id='upload-img-wrapper'>
+          <div id='upload-text'>
+            Browse Files
+          </div>
+          <input id='upload-img' type='file' name='pic' accept='image/*'>
         </div>
-        <input id='upload-img' type='file' name='pic' accept='image/*'>
+        <div id='filename'>
+        </div>
+        <input id='confirm-upload' type='submit' value='Upload'>
       </div>
-      <input type='submit' value='Upload'>
     </form>
   </div>
 </div>
+
+<script type='text/javascript'>
+  var file = document.getElementById('upload-img');
+  var namefile = document.getElementById('filename');
+
+  file.addEventListener('change', function(e) {
+    var filename = file.value.split("C:\\fakepath\\").join("");
+    namefile.innerHTML = filename;
+  })
+</script>
