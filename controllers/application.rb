@@ -8,6 +8,10 @@ class ApplicationController < Sinatra::Base
 
   enable :sessions
 
+  def set_user(user_name)
+    session[:user] = user_name
+  end
+
   def set_message(message)
     session[:message] = message
     # <%= session[:message] %>
