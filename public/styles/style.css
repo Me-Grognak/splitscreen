@@ -176,20 +176,35 @@ select:focus {
   width: 100%;
 }
 
-/*------------------------- GALLERY STYLING --------------------------------*/
-
-.gallery, td, th {
-  border: 1px solid black;
+header {
+  height: 100%;
+  width: 100%;
+  border-bottom: 1px solid rgb(255, 255, 255);
+  box-shadow: 0px 3px 3px 0px rgba(51, 50, 50, 0.35);
+  position: relative;
+  z-index: 10;
 }
 
+footer {
+  height: 100px;
+  width: 100%;
+  box-shadow: 0px -3px 3px 0px rgba(51, 50, 50, 0.35);
+  border-top: 1px solid rgb(255, 255, 255);
+}
+
+
+/*------------------------- GALLERY STYLING --------------------------------*/
 .gallery_container {
   margin: 0 auto;
-  width: 900px;
+  background-color: rgb(205, 203, 203);
+  width: 100%;
 }
 
 .gallery {
-  background-color: rgb(219, 219, 219);
-  height: 900px;
+  margin: 0 auto;
+  height: 560px;
+  width: 80%;
+  padding: 30px;
 }
 
 img {
@@ -200,13 +215,14 @@ img {
 /* -------------------- POST STYLING ------------------------------------ */
 
 .post {
-  width: 24%;
+  width: 23%;
   height: 150px;
   background-color: #181817;
-  border: 2px solid #444442;
-  margin: 4px 2px;
+  border: 2px solid #868686;
+  margin: 8px 4px;
   position: relative;
   float: left;
+  /*box-shadow: 0px 3px 4px rgba(3, 3, 3, 0.53);*/
 }
 
 .pull-bottom {
@@ -217,8 +233,6 @@ img {
 }
 
 .likes, .views {
-  margin-bottom: 5px;
-  padding: 8px;
 }
 
 .likes {
