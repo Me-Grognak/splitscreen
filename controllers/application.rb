@@ -3,6 +3,8 @@ class ApplicationController < Sinatra::Base
   require "bundler"
   Bundler.require
 
+  require "date"
+
   enable :sessions
 
   def set_message(message)
