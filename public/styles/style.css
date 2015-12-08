@@ -12,7 +12,6 @@ input {
   font-size: 14px;
 }
 
-<<<<<<< HEAD
 #upload-img {
   cursor: pointer;
   z-index: 10;
@@ -49,8 +48,6 @@ input {
 }
 
 
-=======
->>>>>>> 59dac6de158471bf8230c631109a1f2a9edc50f9
 input[type="button"], [type="submit"] {
   cursor: pointer;
   letter-spacing: .1rem;
