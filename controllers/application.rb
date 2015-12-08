@@ -1,6 +1,7 @@
 class ApplicationController < Sinatra::Base
 
   require "bundler"
+  require 'SecureRandom'
   Bundler.require
 
   require "date"
