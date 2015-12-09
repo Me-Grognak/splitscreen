@@ -1,0 +1,39 @@
+<h1 class="header_msg">Edit Profile</h1>
+
+<form class="edit-profile" action="/profile/edit_profile/<%= @user_name %>" method="post"><hr>
+  <div class="form_fields">
+    <h3 class="header_msg">Region</h3>
+  </div>
+  <div class="form_fields">
+    <input type="hidden" name="account_id" value="<%= @id %>">
+    <input type="text" name="location" placeholder="City, State">
+  </div>
+  <div class="form_fields">
+    <h3 class="header_msg">Platforms</h3>
+  </div>
+  <div class="form_fields">
+    <input type="checkbox" name="pc" value="true">PC
+    <input type="checkbox" name="ps4" value="true">Playstation 4
+    <input type="checkbox" name="xbo" value="true">X-Box One
+    <input type="checkbox" name="wiiu" value="true">Wii U
+    <input type="checkbox" name="ps3" value="true">Playstation 3
+    <input type="checkbox" name="xb360" value="true">X-Box 360
+    <input type="checkbox" name="wii" value="true">Wii
+  </div>
+  <div class="form_fields">
+    <h3 class="header_msg">Gamertags</h3>
+  </div>
+  <div class="form_fields">
+    <input type="text" name="steam_tag" placeholder="Steam ID">
+  </div>
+  <div class="form_fields">
+    <input type="text" name="psn_tag" placeholder="Playstation Network Gamertag">
+  </div>
+  <div class="form_fields">
+    <input type="text" name="xbl_tag" placeholder="X-Box Live Gamertag">
+  </div>
+  <div class="form_fields">
+    <input type="submit" id="login_btn" value="Save">
+    <a href="/"><input type="button" id="cancel_btn" value="Cancel"></a>
+  </div>
+</form>
