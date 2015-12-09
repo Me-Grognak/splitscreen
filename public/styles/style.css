@@ -148,6 +148,21 @@ input[type="button"]:hover, [type="submit"]:hover {
   margin: 0 auto;
 }
 
+.edit-profile {
+  width: 420px;
+  margin: 0 auto;
+}
+
+input[type="checkbox"] {
+  line-height: 16px;
+  font-size: 10px;
+  padding: 0;
+  margin: 8px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+}
+
 /*------------------------ Universal Input Styles ----------------------------*/
 
 input[type="text"], input[type="password"] {

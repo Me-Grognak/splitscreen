@@ -25,6 +25,21 @@ class ProfileController < ApplicationController
     new_comment.save
 
     redirect "/profile/" + session[:current_user].user_name
+  end
 
+
+  get "/edit_profile/:user_name" do
+    p @id = session[:current_user].id
+    p @user_name = session[:current_user].user_name
+    erb :edit_profile
+  end
+
+  post "/edit_profile/:user_name" do
+
+    new_profile = Profile.new(account_id: params[:account_id], location: params[:location], pc: params[:pc], ps4: params[:ps4], xbo: params[:xbo], wiiu: params[:wiiu], ps3: params[:ps3], xb360: params[:xb360], wii: params[:wii], steam_id: params[:steam_tag], psn_id: params[:psn_tag], xbl_id: params[:xbl_tag]);
+    new_profile.save
+
+    p new_profile
+    redirect "/:user_name"
   end
 end

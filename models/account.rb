@@ -1,6 +1,7 @@
 class Account < ActiveRecord::Base
   has_many :account_image, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_one :profiles, dependent: :destroy
 
   include BCrypt
 
