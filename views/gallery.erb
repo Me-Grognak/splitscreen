@@ -1,0 +1,19 @@
+<%@images.each do |image|%>
+  <div id='<%= image.image_path %>' class='post'>
+    <img src='<%="/uploads/images/#{image.image_path}" %>' alt='pic'>
+    <div class='section'>
+      <div class='black-overlay'>
+        <div class='pull-top'>
+          <div class='image-title'>
+            <%= image.title %>
+          </div>
+        </div>
+      </div>
+      <div class='info-overlay'>
+        </div>
+    </div>
+    <div class='bottom'>
+      <span class='white'>Uploaded By:</span> <a href='<%= "/profile/#{image.user_name}"%>'><span class='user'><%= image.user_name %></span></a>
+    </div>
+  </div>
+<% end %>
