@@ -20,12 +20,10 @@
 <footer></footer>
 
 <script type="text/javascript">
+
   var regButton = document.getElementById('register_btn');
   regButton.addEventListener('click', function() {
     window.location.href = "/register";
   });
-
-  document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
-  document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
 
 </script>

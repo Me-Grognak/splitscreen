@@ -10,8 +10,9 @@
   <body>
 
       <nav id="navbar">
+        <a href="/" style="float: left; color: white;">Logo</a>
         <div class="nav_menu">
-          <a href="/profile/<%= session[:user] %>" id="user-anchor"><%= session[:user] %></a>
+          <a href="/profile/user/<%= session[:user] %>" id="user-anchor"><%= session[:user] %></a>
           <a href='/upload'><input type="button" id="upload_btn" value="UPLOAD image"></a>
           <input type="button" id="login_btn" value="Sign In">
           <input type="button" id="register_btn" value="Sign Up!">
@@ -22,5 +23,25 @@
     <%= yield %>
 
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript">
+      var loginButton = document.getElementById('login_btn');
+      loginButton.addEventListener('click', function() {
+        window.location.href = "/login";
+      });
+
+      var logoutButton = document.getElementById('logout_btn');
+      logoutButton.addEventListener('click', function() {
+        window.location.href = "/logout";
+      });
+
+      var signupButton = document.getElementById('register_btn');
+      signupButton.addEventListener('click', function() {
+        window.location.href = "/register";
+      });
+
+      loginButton.style.display = "<%= session[:signup] %>";
+      logoutButton.style.display = "<%= session[:logged] %>";
+      signupButton.style.display = "<%= session[:signup] %>";
+    </script>
   </body>
 </html>

@@ -1,7 +1,6 @@
 class AccountController < ApplicationController
 
   get "/" do
-    self.resets
     if authorization_check()
       self.set_logged("block")
       self.set_signup("none")
@@ -13,10 +12,7 @@ class AccountController < ApplicationController
 
 #Register "GET"-----------------------------------------------------------------
   get "/register" do
-    self.resets
-    if authorization_check()
-      self.set_logged("block")
-    end
+    self.set_message(nil)
     erb :register
   end
 #-------------------------------------------------------------------------------
@@ -41,8 +37,14 @@ class AccountController < ApplicationController
 
     p new_user
 
+    new_profile = Profile.new(account_id: new_user.id, location: nil, pc: nil, ps4: nil, xbo: nil, wiiu: nil, ps3: nil, xb360: nil, wii: nil, steam_id: nil, psn_id: nil, xbl_id: nil);
+    new_profile.save
+
+    p new_profile
+
     session[:current_user] = new_user
     self.set_logged("block")
+    self.set_signup("none")
     self.set_user(session[:current_user].user_name)
     erb :register_success
 
@@ -53,11 +55,7 @@ class AccountController < ApplicationController
 
 #Login "GET"--------------------------------------------------------------------
   get "/login" do
-    self.resets
-    if authorization_check()
-      self.set_logged("block")
-      self.set_signup("none")
-    end
+    self.set_message(nil)
     erb :login
   end
 #-------------------------------------------------------------------------------
@@ -79,7 +77,7 @@ class AccountController < ApplicationController
         self.set_logged("block")
         self.set_signup("none")
         self.set_user(session[:current_user].user_name)
-        redirect "/profile/" + params[:user_name]
+        redirect "/profile/user/" + params[:user_name]
       else
         self.set_message("Invalid username or password")
         erb :login
