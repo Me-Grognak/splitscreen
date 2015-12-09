@@ -5,11 +5,16 @@ class ApplicationController < Sinatra::Base
   require 'http'
   require 'json'
   require 'dotenv'
+  require 'date'
   Bundler.require
 
   Dotenv.load
 
   enable :sessions
+
+  def set_user(user_name)
+    session[:user] = user_name
+  end
 
   def set_message(message)
     session[:message] = message

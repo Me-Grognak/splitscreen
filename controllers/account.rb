@@ -43,6 +43,7 @@ class AccountController < ApplicationController
 
     session[:current_user] = new_user
     self.set_logged("block")
+    self.set_user(session[:current_user].user_name)
     erb :register_success
 
   end
@@ -77,6 +78,7 @@ class AccountController < ApplicationController
         self.set_message("Welcome back, " + params[:user_name])
         self.set_logged("block")
         self.set_signup("none")
+        self.set_user(session[:current_user].user_name)
         redirect "/profile/" + params[:user_name]
       else
         self.set_message("Invalid username or password")
@@ -100,6 +102,7 @@ class AccountController < ApplicationController
     self.set_message("You have successfully logged out")
     self.set_logged("none")
     self.set_signup("inline-block")
+    self.set_user(nil)
     session[:current_user] = nil
     erb :logout
   end

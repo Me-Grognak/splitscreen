@@ -19,6 +19,19 @@ a {
 a:hover {
   color: rgb(0, 169, 255);
 
+
+#user-anchor {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  margin-right: 8px;
+  color: white;
+}
+
+#user-anchor:hover {
+  text-decoration: underline;
+
 }
 
 input[type="button"], [type="submit"] {
@@ -40,6 +53,8 @@ input[type="button"], [type="submit"] {
 input[type="button"]:hover, [type="submit"]:hover {
   outline: 0;
 }
+
+/*----------------------------------------------------------------------------*/
 
 #login_btn:hover {
   background-color: rgb(96, 195, 220);
@@ -107,6 +122,8 @@ input[type="button"]:hover, [type="submit"]:hover {
   margin: 0 auto;
 }
 
+/*------------------------ Universal Input Styles ----------------------------*/
+
 input[type="text"], input[type="password"] {
   width: 100%;
   padding: 6px 10px;
@@ -127,6 +144,8 @@ textarea:focus,
 select:focus {
   border: 1px solid #33C3F0;
   outline: 0; }
+
+/*----------------------------------------------------------------------------*/
 
 .form_fields {
   margin: 6%;
@@ -436,9 +455,45 @@ footer {
   opacity: 1;
   border-radius: 10px;
 }
+/*--------------------------- Comment Posts ----------------------------------*/
 
+.comment-post {
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 
+textarea {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 800px;
+  font-size: 16px;
+  padding: 8px;
+}
 
+#post-btn {
+  background-color: #98dafc;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 20px;
+}
+
+#post-btn:hover {
+  background-color: #86c8ea;
+}
+
+.posts {
+  width: 90%;
+  margin: 0 auto;
+  color: #888;
+}
+
+.posts p {
+  padding: 4px 10px;
+}
+
+/*----------------------------------------------------------------------------*/
 
 /*------------------------- Media Queries ------------------------------------*/
 
@@ -605,13 +660,16 @@ footer {
     text-align: center;
   }
 
-  .profile_comments {
+  .profile-comments {
     float: right;
     background-color: white;
     width: 960px;
-    height: 600px;
+    /*height: 610px;*/
+    overflow: auto;
     border-radius: 10px;
     margin-top: 30px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
   }
+
 }

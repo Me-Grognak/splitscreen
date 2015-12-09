@@ -5,6 +5,7 @@ require "./controllers/account"
 require "./controllers/profile"
 require "./models/account"
 require "./models/profile"
+require "./models/comment"
 
 require "./models/image"
 require "./controllers/image"
