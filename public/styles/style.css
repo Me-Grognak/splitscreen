@@ -12,6 +12,15 @@ input {
   font-size: 14px;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(0, 169, 255);
+
+}
+
 input[type="button"], [type="submit"] {
   cursor: pointer;
   letter-spacing: .1rem;
@@ -218,9 +227,70 @@ footer {
   z-index: 0;
 }
 
-
+.clear {
+  clear: both;
+}
 
 /*------------------------- GALLERY STYLING --------------------------------*/
+
+
+/*------------------------- GALLERY SEARCH --------------------------------*/
+.gallery_header {
+  margin: 20px auto;
+  width: 40%;
+  position: relative;
+}
+
+.suggested_search {
+  position: relative;
+  width: 70%;
+  background: red;
+  display: none;
+}
+
+.search_wrap {
+  margin: 0 auto;
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  width: 99%;
+}
+
+.suggested_search ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.suggested_search ul li {
+  background: rgb(233, 233, 233);
+  border-bottom: 1px solid black;
+  font-size: 14px;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  width: 100%;
+}
+
+
+#searchbar {
+  width: 70%;
+  float: left;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.searchbox {
+  height: 38px;
+  line-height: 38px;
+  background: rgb(65, 176, 212);
+  width: 30%;
+  float: left;
+}
+
+/*-----------------------------------------------------------------------------*/
+
+
 .gallery_container {
   margin: 0 auto;
   background-color: rgb(205, 203, 203);
@@ -238,36 +308,87 @@ footer {
 .gallery img {
   width: 100%;
   height: 100%;
-  border-radius: 10px;
 }
 
 /* -------------------- POST STYLING ------------------------------------ */
+
+.white {
+  text-shadow: 0.3px 0.7px 0px black;
+  color: white;
+  font-size: 12px;
+}
+
+.user {
+  text-shadow: 0.3px 0.5px 0px black;
+  color: rgb(7, 173, 244);
+  font-size: 12px;
+}
+
+.bottom {
+  margin-top: -2px;
+}
 
 .post {
   width: 23.7%;
   height: 150px;
   background-color: #181817;
   border: 3px solid #504c4c;
-  margin: 8px 4px;
+  margin: 12px 4px;
   position: relative;
   float: left;
   border-radius: 4px;
   /*box-shadow: 0px 3px 4px rgba(3, 3, 3, 0.53);*/
 }
 
-.black-overlay {
+.section {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  position: absolute;
+}
+
+.section:hover .black-overlay {
+  opacity: 0;
+}
+
+.section:hover .info-overlay {
+  opacity: 1;
+}
+
+.black-overlay {
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  position: relative;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
   opacity: 1;
-  transition: 1s opacity;
+  transition: 0.5s opacity;
 }
 
-.black-overlay:hover {
+.info-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0;
+  transition: 0.5s opacity;
+}
+
+.pull-top {
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.image-title {
+  font-size: 14px;
+  margin-top: 3px;
+  margin-left: 6px;
+  color: white;
 }
 
 .pull-bottom {

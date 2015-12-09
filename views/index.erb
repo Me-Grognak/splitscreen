@@ -6,18 +6,46 @@
 
 <div class='gallery_container'>
   <div class='gallery_header' style='text-align: center'>
+    <input id='searchbar' type='text' name='search_query' maxlength='50'>
+    <div class='suggested_search'>
+      <div class='search_wrap'>
+        <ul>
+          <li> <i class="fa fa-gamepad" style='color: red;'></i> Grand Theft Auto </li>
+          <li> <i class="fa fa-gamepad" style='color: red;'></i> Assassins Creed </li>
+        </ul>
+      </div>
+    </div>
+    <div class='searchbox'>
+      <i class="fa fa-search fa-lg"></i> Search
+    </div>
+    <div class='search_selection'>
+      <input type='radio' name='search_type' value='gallery'> Gallery
+      <input type='radio' name='search_type' value='profile'> Profiles
+      <button id='get_more'>MORE!!!</button>
+    </div>
+  </div>
+  <div class='clear'>
+
   </div>
   <div class='gallery'>
-    <%@images.each do |image|%>
-      <div id='<%= image.image_path %>' class='post'>
-        <img src='<%="/uploads/images/#{image.image_path}" %>' alt='pic'>
-        <div class='black-overlay'></div>
-      </div>
-    <% end %>
+    <%= erb :gallery %>
   </div>
 </div>
 
 <script type="text/javascript">
+  $('input[name="search_type"]').on('change', function(e) {
+    console.log($(this).val());
+    $.ajax({
+      type: 'GET',
+      url: '/',
+      data: 'd',
+      success: function(data) {
+
+      },
+      dataType: 'json'
+    });
+  });
+  var more = document.getElementById('get_more');
   var regButton = document.getElementById('register_btn');
   regButton.addEventListener('click', function() {
     window.location.href = "/register";
@@ -25,5 +53,38 @@
 
   document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
   document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
+
+
+  var client = {
+    total: 12,
+    ping: "pong"
+  };
+  more.addEventListener('click', function(e) {
+    //var j = JSON.stringify();
+    $.ajax({
+      type: "GET",
+      url: '/image/more',
+      data: client,
+      success: function(data) {
+        data.forEach(function(thing) {
+          makePost(thing);
+        });
+        client.total += 12;
+      },
+      dataType: 'json'
+    })
+  });
+
+  function makePost(image) {
+    var post = $('<div id="' + image.image_path + '" class="post"></div>');
+    var img = $('<img src="/uploads/images/' + image.image_path + '" alt="pic">');
+    var section = $('<div class="section"></div>');
+    var black_overlay = $("<div class='black-overlay'> <div class='pull-top'> <div class='image-title'>" + image.title + "</div></div></div>")
+
+    $(post).append($(img));
+    $(section).append($(black_overlay))
+    $(post).append($(section));
+    $('.gallery').append($(post));
+  }
 
 </script>

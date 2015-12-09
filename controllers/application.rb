@@ -2,7 +2,12 @@ class ApplicationController < Sinatra::Base
 
   require "bundler"
   require 'SecureRandom'
+  require 'http'
+  require 'json'
+  require 'dotenv'
   Bundler.require
+
+  Dotenv.load
 
   enable :sessions
 
@@ -23,6 +28,10 @@ class ApplicationController < Sinatra::Base
     session[:message] = nil
     session[:logged] = nil
     session[:signup] = nil
+  end
+
+  def get_SteamProfile(userid)
+    return JSON.parse(HTTP.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + ENV['steam_api_key'] + "&steamids=76561197960435530"))
   end
 
   ActiveRecord::Base.establish_connection(

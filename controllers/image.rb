@@ -14,7 +14,7 @@ post '/upload' do
   pic = Account_Image.new
   pic.image_path = filepath
   pic.user_name = session[:current_user].user_name
-  pic.title = params[:title]
+  pic.title = params[:title] || 'untitled'
   pic.save
 
   File.open('public/uploads/images/' + filepath, 'w') do |f|
@@ -24,5 +24,28 @@ post '/upload' do
   redirect "/"
 end
 #-------------------------------------------------------------------------------
+
+get '/more' do
+  stuff = params
+  thing = stuff.to_hash
+  total = thing['total'].to_i
+  allshit = Account_Image.all.length
+  max = Account_Image.all.length - total
+  min = max - 4
+  print "Min: #{min} Max: #{max} Total: #{allshit}"
+  return Account_Image.where(:id => min..max).to_json
+end
+
+
+get '/category' do
+  fucku = params
+  
+
+end
+
+
+
+
+
 
 end
