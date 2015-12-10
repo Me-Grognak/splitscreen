@@ -21,23 +21,24 @@
     <div class='search_selection'>
       <input type='radio' name='search_type' value='gallery'> Gallery
       <input type='radio' name='search_type' value='profile'> Profiles
-      <button id='get_more'>MORE!!!</button>
     </div>
   </div>
   <div class='clear'>
 
   </div>
-  <div class='gallery'>
-    <%= erb :gallery %>
+  <div class='hold_gallery'>
+    <div class='gallery'>
+        <%= erb :gallery %>
+    </div>
+    <div id='loadit' class='load_gif'>
+      <img id='load' src='http://press.solarimpulse.com/img/ajax_loader.gif'>
+    </div>
   </div>
 </div>
 
 <footer></footer>
 
 <script type="text/javascript">
-<<<<<<< HEAD
-
-=======
   $('input[name="search_type"]').on('change', function(e) {
     console.log($(this).val());
     $.ajax({
@@ -50,50 +51,66 @@
       dataType: 'json'
     });
   });
-  var more = document.getElementById('get_more');
->>>>>>> af59d63f121bc82b0dbe72b4fa744c4882494012
   var regButton = document.getElementById('register_btn');
   regButton.addEventListener('click', function() {
     window.location.href = "/register";
   });
-
-<<<<<<< HEAD
-=======
   document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
   document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
 
 
   var client = {
-    total: 12,
-    ping: "pong"
+    total: 20,
   };
-  more.addEventListener('click', function(e) {
-    //var j = JSON.stringify();
+
+  function getImages() {
     $.ajax({
       type: "GET",
-      url: '/image/more',
+      url: '/images/more',
       data: client,
       success: function(data) {
-        data.forEach(function(thing) {
-          makePost(thing);
-        });
-        client.total += 12;
+        if (data.done) {
+          $(window).off('.imageupdater');
+          console.log('woww!');
+        } else {
+          data.forEach(function(thing) {
+            makePost(thing);
+          });
+          client.total += 4;
+          $(window).on('scroll.imageupdater', checkScroll);
+        };
+        $('#loadit').hide();
       },
       dataType: 'json'
-    })
-  });
+    });
+  };
 
   function makePost(image) {
     var post = $('<div id="' + image.image_path + '" class="post"></div>');
+    var link = $('<a href="/images/' + image.id + '"></a>');
     var img = $('<img src="/uploads/images/' + image.image_path + '" alt="pic">');
     var section = $('<div class="section"></div>');
     var black_overlay = $("<div class='black-overlay'> <div class='pull-top'> <div class='image-title'>" + image.title + "</div></div></div>")
-
+    var bottom = $("<div class='bottom'><span class='white'>Uploaded By:</span> <a href='/profile/" + image.user_name + "'><span class='user'> " + image.user_name + " </span></a></div>")
     $(post).append($(img));
     $(section).append($(black_overlay))
     $(post).append($(section));
-    $('.gallery').append($(post));
+    $(post).append($(bottom));
+    $(link).append($(post));
+    $('.gallery').append($(link));
   }
 
->>>>>>> af59d63f121bc82b0dbe72b4fa744c4882494012
+  var checkScroll = function(e) {
+    var maxScrollHeight = $(document).height() - $(window).height();
+    var updateHeight = maxScrollHeight - (maxScrollHeight * 0.1);
+    var scrollHeight = $(document).scrollTop();
+
+    if (scrollHeight > updateHeight) {
+      $('#loadit').css('display', 'block');
+      getImages();
+      $(window).off('.imageupdater');
+    };
+  }
+
+  $(window).on('scroll.imageupdater', checkScroll);
 </script>

@@ -25,27 +25,60 @@ post '/upload' do
 end
 #-------------------------------------------------------------------------------
 
-get '/more' do
-  stuff = params
-  thing = stuff.to_hash
-  total = thing['total'].to_i
-  allshit = Account_Image.all.length
+get '/more' do #sends additional pictures upon ajax request
+  total = params.to_hash['total'].to_i
   max = Account_Image.all.length - total
-  min = max - 4
-  print "Min: #{min} Max: #{max} Total: #{allshit}"
-  return Account_Image.where(:id => min..max).to_json
+  min = max - 11 #12
+  if min < 0 && max < 0
+    return {:done => true}.to_json
+  else
+    sleep 0.3
+    return Account_Image.where(:id => min..max).reverse.to_json
+  end
 end
 
 
-get '/category' do
-  fucku = params
-  
-
+get '/:id' do
+  image = Account_Image.find_by(id: params[:id])
+  if image
+    @image = image
+    @comments = Image_Comment.where(image_id: params[:id])
+    image.views += 1
+    image.save
+    return erb :image
+  else
+    return 'Page does not exist!'
+  end
 end
 
 
+post '/comment' do
+  if authorization_check
+    options = params.to_hash
+    new_comment = Image_Comment.new
+    new_comment.account_id = session[:current_user].id
+    new_comment.user_name = session[:current_user].user_name
+    new_comment.border = options['border']
+    new_comment.color = options['color']
+    new_comment.image_id = options['image']
+    new_comment.comment = options['text']
+    new_comment.pos_x = options['posx']
+    new_comment.pos_y = options['posy']
+    new_comment.save
+  else
+    print "user not logged in!"
+  end
+end
 
-
+post '/liked' do
+  if authorization_check
+    image = Account_Image.find_by(id: params[:id])
+    image.likes += 1
+    image.save
+  else
+    print "user not logged in!"
+  end
+end
 
 
 end

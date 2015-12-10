@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="/styles/style.css" media="screen" title="no title" charset="utf-8">
     <title>SplitScreen</title>
   </head>
@@ -13,6 +14,9 @@
       <nav id="navbar">
         <a href="/" style="float: left; color: white;">Logo</a>
         <div class="nav_menu">
+          <div class='temporary' style='display: inline-block;'>
+            <a href='/'><i class="fa fa-home" style='color: white;'></i></a>
+          </div>
           <a href="/profile/user/<%= session[:user] %>" id="user-anchor"><%= session[:user] %></a>
           <a href='/upload'><input type="button" id="upload_btn" value="UPLOAD image"></a>
           <input type="button" id="login_btn" value="Sign In">
@@ -23,7 +27,6 @@
 
     <%= yield %>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js'></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript">
       var loginButton = document.getElementById('login_btn');

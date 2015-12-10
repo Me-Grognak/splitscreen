@@ -6,10 +6,11 @@ require "./controllers/profile"
 require "./models/account"
 require "./models/profile"
 require "./models/comment"
+require "./models/image_comment"
 
 require "./models/image"
 require "./controllers/image"
 
 map("/") { run AccountController }
-map ("/image") { run ImageController }
+map ("/images") { run ImageController }
 map("/profile") { run ProfileController }
