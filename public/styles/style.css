@@ -18,7 +18,7 @@ a {
 
 a:hover {
   color: rgb(0, 169, 255);
-
+}
 
 #user-anchor {
   text-decoration: none;
@@ -31,11 +31,7 @@ a:hover {
 
 #user-anchor:hover {
   text-decoration: underline;
-<<<<<<< HEAD
   font-weight: 600;
-=======
-
->>>>>>> af59d63f121bc82b0dbe72b4fa744c4882494012
 }
 
 input[type="button"], [type="submit"] {

@@ -1,7 +1,7 @@
 <section class="pro_container">
-  <div class="row">
+  <div>
     <div class="profile_img" style="background-image: url('/images/profile_img.png'); background-size: cover;">
-      <a href="/profile/edit_profile/<%= @user_name %>">Edit Profile</a>
+      <a href="/profile/edit_profile/<%= @user_name %>" id="edit-profile-link">Edit Profile</a>
       <div id="prof-img-foot">
         <p><%= params[:user_name] %> is <span style="color:#00ff00;">Online</span></p>
       </div>
@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <div class="row contents">
+  <div class="contents">
     <div class="profile_props">
       <div id="props">
         <div id="region">
@@ -62,6 +62,9 @@
 <script type="text/javascript">
 console.log("<%= @user_name %>");
 console.log("<%= @id %>");
+
+document.getElementById('form-container').style.display = "<%= @no_post %>";
+document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
 
 //------------------------------ Image Slider --------------------------------//
 
@@ -160,11 +163,11 @@ console.log("<%= @id %>");
         var steam = document.createElement('li');
         var psn = document.createElement('li');
         var xbl = document.createElement('li');
-        steam.innerText = "Steam: " + output[0].steam_id;
+        steam.innerHTML = "<strong>Steam:</strong> " + output[0].steam_id;
         tags.appendChild(steam);
-        psn.innerText = "PSN: " + output[0].psn_id;
+        psn.innerHTML = "<strong>PSN:</strong> " + output[0].psn_id;
         tags.appendChild(psn);
-        xbl.innerText = "X-Box Live: " + output[0].xbl_id;
+        xbl.innerHTML = "<strong>X-Box Live:</strong> " + output[0].xbl_id;
         tags.appendChild(xbl);
 
         // Set the user's platforms

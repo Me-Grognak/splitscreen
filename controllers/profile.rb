@@ -6,7 +6,12 @@ class ProfileController < ApplicationController
     @id = user.id
     comment = Comment.where(account_id: @id)
     @comments = comment.reverse
-
+    if !authorization_check || session[:current_user].user_name != params[:user_name]
+      @no_edit = "none"
+    end
+    if session[:current_user] == nil
+      @no_post = "none"
+    end
     erb :profile
   end
 
