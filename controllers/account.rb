@@ -6,7 +6,7 @@ class AccountController < ApplicationController
       self.set_logged("block")
       self.set_signup("none")
     end
-    @images = Account_Image.last(12).reverse
+    @images = Account_Image.last(20).reverse
     erb :index
   end
 

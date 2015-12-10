@@ -1,0 +1,199 @@
+<div class='wrapper'>
+  <div class='showcase-title'>
+    <%= @image.title %>
+  </div>
+  <div class='showcase-box'>
+    <div id='case-click' class='showcase-click-box' oncontextmenu="return false;">
+      <div class='showcase-image-box'>
+        <img id='showcase-image' data-id='<%= @image.id %>'src='/uploads/images/<%= @image.image_path %>'>
+      </div>
+      <div class='showcase-comment-box'>
+        <% @comments.each do |comment| %>
+          <div class='marker-image-comment' style='top: <%=comment.pos_y%>px; left: <%=comment.pos_x%>px; border-color: <%= comment.border %>; background: <%= comment.color %>;'>
+            <div class='image-comment'>
+              <div class='image-comment-author' style='color: <%= comment.color %>;'>
+                <%= comment.user_name %>
+              </div>
+              <div class='image-comment-text'>
+                <%= comment.comment %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class='image-info'>
+    <div class='image-stats'>
+      <div id='image-stat-likes' class='stat'>
+        <div class='stat-icon'>
+          <i id='like-icon' class="fa fa-thumbs-up fa-2x" style='color: white;'></i>
+        </div>
+        <div class='stat-print'>
+          Likes: <%= @image.likes %>
+        </div>
+      </div>
+      <div id='image-stat-views' class='stat'>
+        <div class='stat-icon'>
+          <i class="fa fa-eye fa-2x"></i>
+        </div>
+        <div class='stat-print'>
+          Views: <%= @image.views %>
+        </div>
+      </div>
+    </div>
+    <div class='image-tip'>
+      <h4>
+        Click on the image to add a comment!
+      </h4>
+    </div>
+    <div class='image-uploader'>
+      <span class='upload-text'>Uploaded By:</span> <a href='/profile/<%= @image.user_name%>'><span class='upload-user'><%= @image.user_name %></span></a>
+    </div>
+    <div class='comment-modifier'>
+      <button id='change-comment-state'>Toggle Comments</button>
+    </div>
+  </div>
+</div>
+
+<div id='comment-box'>
+  <div class='comment-box-header'>
+    Add Comment
+  </div>
+  <textarea id='comment-text'rows='2' maxlength='100'></textarea>
+  <button id='add-comment'>Add Comment</button>
+</div>
+
+
+
+<div id='task-menu' class='task-box'>
+  <ul>
+    <% if authorization_check %>
+    <%= "<li id='task-add-comment'>Add Comment</li>" %>
+    <%= "<li id='task-do-something'>Cancel</li>"%>
+    <% else %>
+    <%= "<a href='/login'><li id='no-user'>Login to Comment</li></a>" %>
+    <% end %>
+  </ul>
+</div>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var left = 0;
+    var top = 0;
+    $('.marker-image-comment').hover(function(e) {
+      $(this).children().stop(true).show(400)
+    }, function(e) {
+      $(this).children().stop(true).hide(400);
+    });
+
+    $('#like-icon').on('click', function(e) {
+      var image_id = $('#showcase-image').data('id');
+      var message = {
+        id: image_id
+      };
+      $(this).css({
+        color: 'rgb(35, 251, 30)'
+      });
+      $.ajax({
+        type: 'POST',
+        url: '/images/liked',
+        data: message,
+        success: function() {
+        },
+        dataType: 'json'
+      });
+    });
+
+
+    $('#change-comment-state').on('click', function(e) {
+      $('.marker-image-comment').toggle();
+    });
+
+    $('#showcase-image').on('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $('#comment-box').hide();
+
+
+      $('#task-menu').css({
+        top: e.pageY,
+        left: e.pageX,
+        display: 'block'
+      });
+      top = e.pageY;
+      left = e.pageX;
+    });
+
+    $('html').on('click', function(e) {
+      $('#task-menu').hide();
+      $('#comment-box').hide();
+    });
+
+    $('#task-add-comment').on('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $('#task-menu').hide();
+      $('#comment-box').css({
+        top: e.pageY,
+        left: e.pageX,
+        display: 'block'
+      });
+    });
+
+    $('#comment-box').on('click', function(e) {
+      e.stopPropagation();
+    });
+
+
+    function colorify(factor, offset) {
+      var colors = [];
+      for (var i = 0; i < 3; i++) {
+        colors.push(Math.round((Math.random() * factor) + offset));
+      }
+      return colors;
+    }
+    function borderify(colors) {
+      return colors.map(function(n) {
+        return n - 15;
+      });
+    }
+
+    $('#add-comment').on('click', function(e) {
+      var comment = $('#comment-text').val();
+      var image_id = $('#showcase-image').data('id');
+      var colors = colorify(150, 156);
+      var dotcolor = "rgba(" + colors[0] + "," + colors[1] + "," + colors[2] + ", 0.9)";
+      var bordercolors = borderify(colors);
+      var dotborder = "rgba(" + bordercolors[0] + "," + bordercolors[1] + "," + bordercolors[2] + ", 0.9)";
+      var message = {
+        text: comment,
+        posy: top,
+        posx: left,
+        image: image_id,
+        border: dotborder,
+        color: dotcolor
+      };
+      $.ajax({
+        type: 'POST',
+        url: '/images/comment',
+        data: message,
+        success: function(d) {
+          console.log('yo dawg we sent data');
+        },
+        dataType: 'json'
+      });
+
+      setTimeout(function() {
+        window.location.reload();
+      }, 100);
+
+      $('#comment-text').val('');
+      $('#comment-box').hide();
+    });
+
+
+  });
+</script>
