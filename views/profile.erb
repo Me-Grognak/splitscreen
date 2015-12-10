@@ -43,13 +43,14 @@
       <div id="form-container">
         <form class="comment-post" action="/profile/user/<%= @user_name %>" method="post">
           <input type="hidden" name="account_id" value="<%= @id %>">
+          <input type="hidden" name="poster_id" value="<%= @poster_id %>">
           <textarea name="comment" rows="6" cols="40" placeholder="Post comments here..."></textarea>
           <input type="submit" id="post-btn" value="Post">
         </form>
       </div>
       <div id="posts-container">
         <% @comments.each do |comment| %>
-          <%= "<div class='posts'><p id='timestamp'>#{comment.date_created}</p><p id='comments'>#{comment.comment}</p><hr></div>" %>
+          <%= "<div class='posts'><p id='timestamp'>#{comment.date_created} - Posted by: #{@poster_name}</p><p id='comments'>#{comment.comment}</p><hr></div>" %>
         <% end %>
       </div>
     </div>

@@ -4,6 +4,10 @@ class ProfileController < ApplicationController
     @user_name = params[:user_name]
     user = Account.find_by(user_name: @user_name)
     @id = user.id
+    if session[:current_user] != nil
+      @poster_id = session[:current_user].id
+      @poster_name = session[:current_user].user_name
+    end
     comment = Comment.where(account_id: @id)
     @comments = comment.reverse
     if !authorization_check || session[:current_user].user_name != params[:user_name]
@@ -19,7 +23,7 @@ class ProfileController < ApplicationController
 
   post "/user/:user_name" do
 
-    new_comment = Comment.new(account_id: params[:account_id], comment: params[:comment])
+    new_comment = Comment.new(account_id: params[:account_id], poster_id: params[:poster_id], comment: params[:comment])
     new_comment.save
 
     redirect "/profile/user/" + params[:user_name]
