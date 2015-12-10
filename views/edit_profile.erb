@@ -6,31 +6,63 @@
   </div>
   <div class="form_fields">
     <input type="hidden" name="account_id" value="<%= @id %>">
-    <input type="text" name="location" placeholder="City, State">
+    <input type="text" name="location"
+    <% if @profile.location == nil %>
+      <%= "placeholder='City, State'" %>
+    <% else %>
+      <%= "value='#{@profile.location}'" %>
+    <% end %>
+     >
   </div>
   <div class="form_fields">
     <h3 class="header_msg">Platforms</h3>
   </div>
   <div class="form_fields">
-    <input type="checkbox" name="pc" value="true">PC
-    <input type="checkbox" name="ps4" value="true">Playstation 4
-    <input type="checkbox" name="xbo" value="true">X-Box One
-    <input type="checkbox" name="wiiu" value="true">Wii U
-    <input type="checkbox" name="ps3" value="true">Playstation 3
-    <input type="checkbox" name="xb360" value="true">X-Box 360
-    <input type="checkbox" name="wii" value="true">Wii
+    <input type="checkbox" name="pc" value="true" <% if @profile.pc != nil %>
+      <%= "checked=''" %>
+    <% end %>>PC
+    <input type="checkbox" name="ps4" value="true" <% if @profile.ps4 != nil %>
+      <%= "checked=''" %>
+    <% end %>>Playstation 4
+    <input type="checkbox" name="xbo" value="true" <% if @profile.xbo != nil %>
+      <%= "checked=''" %>
+    <% end %>>X-Box One
+    <input type="checkbox" name="wiiu" value="true" <% if @profile.wiiu != nil %>
+      <%= "checked=''" %>
+    <% end %>>Wii U
+    <input type="checkbox" name="ps3" value="true" <% if @profile.ps3 != nil %>
+      <%= "checked=''" %>
+    <% end %>>Playstation 3
+    <input type="checkbox" name="xb360" value="true" <% if @profile.xb360 != nil %>
+      <%= "checked=''" %>
+    <% end %>>X-Box 360
+    <input type="checkbox" name="wii" value="true" <% if @profile.wii != nil %>
+      <%= "checked=''" %>
+    <% end %>>Wii
   </div>
   <div class="form_fields">
     <h3 class="header_msg">Gamertags</h3>
   </div>
   <div class="form_fields">
-    <input type="text" name="steam_tag" placeholder="Steam ID">
+    <input type="text" name="steam_tag" <% if @profile.steam_id == nil %>
+      <%= "placeholder='Steam ID'" %>
+    <% else %>
+      <%= "value='#{@profile.steam_id}'" %>
+    <% end %>>
   </div>
   <div class="form_fields">
-    <input type="text" name="psn_tag" placeholder="Playstation Network Gamertag">
+    <input type="text" name="psn_tag" <% if @profile.psn_id == nil %>
+      <%= "placeholder='Playstation Network Gamertag'" %>
+    <% else %>
+      <%= "value='#{@profile.psn_id}'" %>
+    <% end %>>
   </div>
   <div class="form_fields">
-    <input type="text" name="xbl_tag" placeholder="X-Box Live Gamertag">
+    <input type="text" name="xbl_tag" <% if @profile.xbl_id == nil %>
+      <%= "placeholder='X-Box Live Gamertag'" %>
+    <% else %>
+      <%= "value='#{@profile.xbl_id}'" %>
+    <% end %>>
   </div>
   <div class="form_fields">
     <input type="submit" id="login_btn" value="Save">

@@ -869,6 +869,8 @@ textarea {
     z-index: 999;
     float: left;
     position: relative;
+    background-image: url('/imgs/profile_img.png');
+    background-size: cover;
   }
 
   .profile_img a {
@@ -976,6 +978,18 @@ textarea {
     text-align: left;
   }
 
+  #steam {
+    color: orange;
+  }
+
+  #psn {
+    color: blue;
+  }
+
+  #xbl {
+    color: #00ff00;
+  }
+
 /*----------------------------------------------------------------------------*/
 
   .profile-comments {
@@ -989,6 +1003,19 @@ textarea {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     padding-bottom: 20px;
+  }
+
+  #posts-container span {
+    color: #98dafc;
+  }
+
+  #posts-container span:hover {
+    color: orange;
+  }
+
+  #posts-container a:hover {
+    /*text-decoration: underline;*/
+    font-weight: 600;
   }
 
 }
