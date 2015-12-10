@@ -19,8 +19,8 @@
       <i class="fa fa-search fa-lg"></i> Search
     </div>
     <div class='search_selection'>
-      <input type='radio' name='search_type' value='gallery'> Gallery
-      <input type='radio' name='search_type' value='profile'> Profiles
+      <input type='radio' name='search_type' value='/images/more'> Gallery
+      <input type='radio' name='search_type' value='/profile/info'> Profiles
     </div>
   </div>
   <div class='clear'>
@@ -40,13 +40,23 @@
 
 <script type="text/javascript">
   $('input[name="search_type"]').on('change', function(e) {
-    console.log($(this).val());
+    $('.gallery').children().remove();
+    var route = $(this).val();
+
     $.ajax({
       type: 'GET',
-      url: '/',
-      data: 'd',
+      url: route,
       success: function(data) {
-
+        // if (data.type == 'profiles') {
+        //
+        // } else if (data.type == 'images') {
+        //
+        // }
+        data.forEach(function(profile) {
+          makeProfile(profile);
+        });
+        console.log("DATA!");
+        console.log(data);
       },
       dataType: 'json'
     });
@@ -83,6 +93,15 @@
       },
       dataType: 'json'
     });
+  };
+
+  function makeProfile(profile) {
+    var link = $('<a href="/profile/user/' + profile.user_name + '"></a>');
+    var snippet = $('<div id="' + profile.user_name + '"class="snippet"></div>');
+    var content = $('<div class="snippet-username">' + profile.user_name + '</div> <div class="snippet-avatar"> <img src="/uploads/images/' + profile.avatar_path + '"></div>');
+    $(snippet).append($(content));
+    $(link).append($(snippet));
+    $('.gallery').append($(link));
   };
 
   function makePost(image) {

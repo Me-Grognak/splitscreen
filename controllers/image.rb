@@ -40,6 +40,9 @@ end
 
 get '/:id' do
   image = Account_Image.find_by(id: params[:id])
+  if authorization_check
+    @check = Image_Like.find_by(image_id: params[:id], user_name: session[:current_user].user_name)
+  end
   if image
     @image = image
     @comments = Image_Comment.where(image_id: params[:id])
@@ -72,9 +75,16 @@ end
 
 post '/liked' do
   if authorization_check
-    image = Account_Image.find_by(id: params[:id])
-    image.likes += 1
-    image.save
+    check = Image_Like.find_by(image_id: params[:id], user_name: session[:current_user].user_name)
+    if !check
+      image = Account_Image.find_by(id: params[:id])
+      image.likes += 1
+      image.save
+      like = Image_Like.new
+      like.image_id = params[:id]
+      like.user_name = session[:current_user].user_name
+      like.save
+    end
   else
     print "user not logged in!"
   end

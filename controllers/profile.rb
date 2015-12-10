@@ -12,6 +12,9 @@ class ProfileController < ApplicationController
     if session[:current_user] == nil
       @no_post = "none"
     end
+    if does_user_exist(params[:user_name])
+      @images = Account_Image.where(user_name: params[:user_name])
+    end
     erb :profile
   end
 
@@ -52,12 +55,17 @@ class ProfileController < ApplicationController
 #------------------------ Profile Editing Submissions -------------------------#
   post "/edit_profile/:user_name" do
 
-    profile = Profile.new(account_id: params[:account_id], location: params[:location], pc: params[:pc], ps4: params[:ps4], xbo: params[:xbo], wiiu: params[:wiiu], ps3: params[:ps3], xb360: params[:xb360], wii: params[:wii], steam_id: params[:steam_tag], psn_id: params[:psn_tag], xbl_id: params[:xbl_tag]);
+    profile = Profile.new(account_id: params[:account_id], user_name: session[:current_user].user_name, location: params[:location], pc: params[:pc], ps4: params[:ps4], xbo: params[:xbo], wiiu: params[:wiiu], ps3: params[:ps3], xb360: params[:xb360], wii: params[:wii], steam_id: params[:steam_tag], psn_id: params[:psn_tag], xbl_id: params[:xbl_tag]);
+
     profile.save
 
     p profile
-    redirect "/:user_name"
+    redirect "/profile/user/" + params[:user_name]
   end
 #------------------------------------------------------------------------------#
 
+get "/info" do
+  profiles = Profile.all
+  return profiles.to_json
+end
 end
