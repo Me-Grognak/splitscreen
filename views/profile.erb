@@ -1,6 +1,6 @@
 <section class="pro_container">
   <div>
-    <div class="profile_img" style="background-image: url('/images/profile_img.png'); background-size: cover;">
+    <div class="profile_img">
       <a href="/profile/edit_profile/<%= @user_name %>" id="edit-profile-link">Edit Profile</a>
       <div id="prof-img-foot">
         <p><%= params[:user_name] %> is <span style="color:#00ff00;">Online</span></p>
@@ -9,7 +9,7 @@
     <div class="slideshow">
       <div class="slideshow_wrapper">
         <ul id="slider">
-          <li><img src="http://4d663a369f9f03c3c61e-870e77779efd63f7bd6c2ee08d8cfae6.r2.cf1.rackcdn.com/images/gyO04SLxg8Fq.840x0.Vdef9Kkm.jpg" alt="" /></li>
+          <!-- <li><img src="http://4d663a369f9f03c3c61e-870e77779efd63f7bd6c2ee08d8cfae6.r2.cf1.rackcdn.com/images/gyO04SLxg8Fq.840x0.Vdef9Kkm.jpg" alt="" /></li> -->
           <!-- <li><img src="http://www.gameondaily.com/wordpress/wp-content/uploads/2015/05/2864036-assassins_creed_syndicate_gang_leader-1200x666.jpg" alt="" /></li>
           <li><img src="http://www.gamerheadlines.com/wp-content/uploads/2015/05/AC-Syndicate-111.jpg" alt="" /></li>
           <li><img src="http://cdn.mos.techradar.com/art/games/Fallout%204/E3%20press/Fallout4_E3_Workshop_1434324024-970-80.jpg" alt="" /></li>
@@ -43,14 +43,14 @@
       <div id="form-container">
         <form class="comment-post" action="/profile/user/<%= @user_name %>" method="post">
           <input type="hidden" name="account_id" value="<%= @id %>">
-          <input type="hidden" name="poster_id" value="<%= @poster_id %>">
+          <input type="hidden" name="poster_name" value="<%= @poster_name %>">
           <textarea name="comment" rows="6" cols="40" placeholder="Post comments here..."></textarea>
           <input type="submit" id="post-btn" value="Post">
         </form>
       </div>
       <div id="posts-container">
         <% @comments.each do |comment| %>
-          <%= "<div class='posts'><p id='timestamp'>#{comment.date_created} - Posted by: #{@poster_name}</p><p id='comments'>#{comment.comment}</p><hr></div>" %>
+          <%= "<div class='posts'><p id='timestamp'>#{comment.date_created} - Posted by: <a href='/profile/user/#{comment.poster_name}'><span>#{comment.poster_name}</span></a></p><p id='comments'>#{comment.comment}</p><hr></div>" %>
         <% end %>
       </div>
     </div>
@@ -164,11 +164,11 @@ document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
         var steam = document.createElement('li');
         var psn = document.createElement('li');
         var xbl = document.createElement('li');
-        steam.innerHTML = "<strong>Steam:</strong> " + output[0].steam_id;
+        steam.innerHTML = "<strong>Steam:</strong><span id='steam'> " + output[0].steam_id + "</span>";
         tags.appendChild(steam);
-        psn.innerHTML = "<strong>PSN:</strong> " + output[0].psn_id;
+        psn.innerHTML = "<strong>PSN:</strong><span id='psn'> " + output[0].psn_id + "</span>";
         tags.appendChild(psn);
-        xbl.innerHTML = "<strong>X-Box Live:</strong> " + output[0].xbl_id;
+        xbl.innerHTML = "<strong>X-Box Live:</strong><span id='xbl'> " + output[0].xbl_id + "</span>";
         tags.appendChild(xbl);
 
         // Set the user's platforms
