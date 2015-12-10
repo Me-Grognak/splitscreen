@@ -30,7 +30,7 @@
           <i id='like-icon' class="fa fa-thumbs-up fa-2x" style='color: white;'></i>
         </div>
         <div class='stat-print'>
-          Likes: <%= @image.likes %>
+          Likes: <span id='like-count'><%= @image.likes %></span>
         </div>
       </div>
       <div id='image-stat-views' class='stat'>
@@ -84,6 +84,7 @@
     var left = 0;
     var top = 0;
     $('.marker-image-comment').hover(function(e) {
+      console.log('the fuck?');
       $(this).children().stop(true).show(400)
     }, function(e) {
       $(this).children().stop(true).hide(400);
@@ -91,6 +92,7 @@
 
     $('#like-icon').on('click', function(e) {
       var image_id = $('#showcase-image').data('id');
+      $('#like-count').text((Number($('#like-count').text()) + 1))
       var message = {
         id: image_id
       };
