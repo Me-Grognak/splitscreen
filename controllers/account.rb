@@ -37,7 +37,7 @@ class AccountController < ApplicationController
 
     p new_user
 
-    new_profile = Profile.new(account_id: new_user.id, location: nil, pc: nil, ps4: nil, xbo: nil, wiiu: nil, ps3: nil, xb360: nil, wii: nil, steam_id: nil, psn_id: nil, xbl_id: nil);
+    new_profile = Profile.new(account_id: new_user.id, user_name: params[:user_name], avatar_path: nil, location: nil, pc: nil, ps4: nil, xbo: nil, wiiu: nil, ps3: nil, xb360: nil, wii: nil, steam_id: nil, psn_id: nil, xbl_id: nil);
     new_profile.save
 
     p new_profile
