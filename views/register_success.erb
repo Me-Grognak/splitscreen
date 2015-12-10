@@ -7,11 +7,10 @@
 </div>
 
 <script type="text/javascript">
+
   var homeButton = document.getElementById('home_btn');
   homeButton.addEventListener('click', function() {
     window.location.href = "/";
   });
 
-  document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
-  document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
 </script>

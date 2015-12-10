@@ -23,7 +23,7 @@ a:hover {
 #user-anchor {
   text-decoration: none;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: .1rem;
   margin-right: 8px;
   color: white;
@@ -31,7 +31,7 @@ a:hover {
 
 #user-anchor:hover {
   text-decoration: underline;
-
+  font-weight: 600;
 }
 
 input[type="button"], [type="submit"], #change-comment-state {
@@ -819,9 +819,37 @@ textarea {
     margin-top: 10px;
     border-radius: 10px;
     border: 1px solid #ccc;
-    background-color: pink;
+    background-color: #98dafc;
     z-index: 999;
     float: left;
+    position: relative;
+  }
+
+  .profile_img a {
+    text-decoration: none;
+    color: white;
+    padding: 4px;
+  }
+
+  .profile_img a:hover {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  #prof-img-foot {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: right;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  #prof-img-foot p {
+    margin-right: 10px;
   }
 
   .slideshow {
@@ -862,12 +890,16 @@ textarea {
 
   .contents {
     clear: left;
+    z-index: -1;
+    position: relative;
   }
+
+/*-------------------------- Profile Properties ------------------------------*/
 
   .profile_props {
     width: 270px;
-    height: 610px;
-    margin-left: 6px;
+    /*height: 610px;*/
+    margin-left: 5px;
     margin-top: -10px;
     background-color: white;
     border-bottom-left-radius: 10px;
@@ -878,11 +910,27 @@ textarea {
 
   #props {
     /*margin-left: 10px;*/
+    padding: 10px;
+    padding-bottom: 20px;
   }
 
   #props p {
     text-align: center;
   }
+
+  #region, #gamertags, #platforms {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #gamertags li, #platforms li {
+    list-style: none;
+    margin: 4px;
+    text-align: left;
+  }
+
+/*----------------------------------------------------------------------------*/
 
   .profile-comments {
     float: right;
@@ -894,6 +942,7 @@ textarea {
     margin-top: 30px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
+    padding-bottom: 20px;
   }
 
 }

@@ -55,7 +55,6 @@
   regButton.addEventListener('click', function() {
     window.location.href = "/register";
   });
-
   document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
   document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
 
@@ -114,5 +113,4 @@
   }
 
   $(window).on('scroll.imageupdater', checkScroll);
-
 </script>
