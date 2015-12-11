@@ -9,18 +9,18 @@
     <input id='searchbar' type='text' name='search_query' maxlength='50'>
     <div class='suggested_search'>
       <div class='search_wrap'>
-        <ul>
+        <ul id='related-searches'>
           <li> <i class="fa fa-gamepad" style='color: red;'></i> Grand Theft Auto </li>
           <li> <i class="fa fa-gamepad" style='color: red;'></i> Assassins Creed </li>
         </ul>
       </div>
     </div>
-    <div class='searchbox'>
+    <div id='search' class='searchbox'>
       <i class="fa fa-search fa-lg"></i> Search
     </div>
     <div class='search_selection'>
-      <input type='radio' name='search_type' value='gallery'> Gallery
-      <input type='radio' name='search_type' value='profile'> Profiles
+      <input type='radio' name='search_type' data-type='images' value='/images/more' checked="checked"> Gallery
+      <input type='radio' name='search_type' data-type='profiles' value='/profile/info'> Profiles
     </div>
   </div>
   <div class='clear'>
@@ -39,50 +39,64 @@
 <footer></footer>
 
 <script type="text/javascript">
-  $('input[name="search_type"]').on('change', function(e) {
-    console.log($(this).val());
-    $.ajax({
-      type: 'GET',
-      url: '/',
-      data: 'd',
-      success: function(data) {
-
-      },
-      dataType: 'json'
-    });
-  });
+  // $('.suggested_search').show();
   var regButton = document.getElementById('register_btn');
   regButton.addEventListener('click', function() {
     window.location.href = "/register";
   });
   document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
   document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
-
-
   var client = {
-    total: 20,
+    total:  0
   };
 
-  function getImages() {
-    $.ajax({
-      type: "GET",
-      url: '/images/more',
-      data: client,
-      success: function(data) {
-        if (data.done) {
-          $(window).off('.imageupdater');
-          console.log('woww!');
-        } else {
-          data.forEach(function(thing) {
-            makePost(thing);
-          });
-          client.total += 4;
-          $(window).on('scroll.imageupdater', checkScroll);
+  $('#searchbar').on('keyup', function(e) {
+    var search_text = $('#searchbar').val(); // TO DO: add parser security to this to prevent XSS attacks.
+    var search_type = $('input[name="search_type"]:checked').data('type')
+      if (search_text.length > 0) {
+        var message = {
+          search: search_text,
+          type: search_type
         };
-        $('#loadit').hide();
-      },
-      dataType: 'json'
+        $.ajax({
+          type: 'POST',
+          url: '/search',
+          data: message,
+          success: function(data) {
+            $('.gallery').children().remove();
+            if (data.type == 'profiles') {
+              data.relations.forEach(function(profile) {
+                makeProfile(profile);
+              });
+            } else if (data.type == 'images') {
+              data.relations.forEach(function(image) {
+                makePost(image);
+              });
+            }
+          },
+          dataType: 'json'
+        });
+      };
     });
+
+  $('input[name="search_type"]').on('change', function(e) {
+    $('#searchbar').val('');
+    $('.gallery').children().remove();
+    $(window).off('.updater');
+    $(window).on('scroll.updater', checkScroll);
+
+    var route = $('input[name="search_type"]:checked').val();
+    client.total = $('.gallery').children().length;
+    getData(route);
+  });
+
+  function makeProfile(profile) {
+    var link = $('<a href="/profile/user/' + profile.user_name + '"></a>');
+    var snippet = $('<div id="' + profile.user_name + '"class="snippet"></div>');
+    var content = $('<div class="snippet-username">' + profile.user_name + '</div> <div class="snippet-avatar"> <img src="/uploads/images/' + profile.avatar_path + '"></div>');
+    $(snippet).append($(content));
+    $(link).append($(snippet));
+    $('.gallery').append($(link));
   };
 
   function makePost(image) {
@@ -101,16 +115,50 @@
   }
 
   var checkScroll = function(e) {
+    if ($('#searchbar').val().length > 0) {
+      return false;
+    }
     var maxScrollHeight = $(document).height() - $(window).height();
     var updateHeight = maxScrollHeight - (maxScrollHeight * 0.1);
     var scrollHeight = $(document).scrollTop();
+    var route = $('input[name="search_type"]:checked').val();
+
 
     if (scrollHeight > updateHeight) {
       $('#loadit').css('display', 'block');
-      getImages();
-      $(window).off('.imageupdater');
+      getData(route);
+      $(window).off('.updater');
     };
   }
 
-  $(window).on('scroll.imageupdater', checkScroll);
+
+  function getData(route) {
+    $.ajax({
+      type: "GET",
+      url: route,
+      data: client,
+      success: function(data) {
+        if (data.done) {
+          $(window).off('.updater');
+          $('#loadit').hide();
+          return;
+        } else if (data.type == 'profiles') {
+            data.data.forEach(function(profile) {
+              makeProfile(profile);
+            });
+            client.total += data.data.length;
+        } else if (data.type == 'images') {
+            data.data.forEach(function(post) {
+              makePost(post);
+          });
+            client.total += data.data.length;
+        }
+          $('#loadit').hide();
+          $(window).on('scroll.updater', checkScroll);
+      },
+      dataType: 'json'
+    });
+  };
+
+  $(window).on('scroll.updater', checkScroll);
 </script>

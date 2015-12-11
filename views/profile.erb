@@ -9,7 +9,9 @@
     <div class="slideshow">
       <div class="slideshow_wrapper">
         <ul id="slider">
-
+          <% @images.each do |image| %>
+            <li class='slider-item'><a href='/images/<%= image.id %>'><img class='slider-img' src='/uploads/images/<%= image.image_path%>'></a></li>
+          <% end %>
         </ul>
       </div>
     </div>
@@ -131,7 +133,7 @@ document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
     }, opts.delay || 17);
   }
 
-  // window.onload = init();
+  window.onload = init();
 //----------------------------------------------------------------------------//
 
 //----------------------- Load Profile Props ---------------------------------//

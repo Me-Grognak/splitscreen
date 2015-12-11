@@ -19,6 +19,9 @@ class ProfileController < ApplicationController
       if session[:current_user] == nil
         @no_post = "none"
       end
+      if does_user_exist(params[:user_name])
+        @images = Account_Image.where(user_name: params[:user_name])
+      end
       erb :profile
     end
   end
@@ -66,6 +69,7 @@ class ProfileController < ApplicationController
 #------------------------ Profile Editing Submissions -------------------------#
   post "/edit_profile/:user_name" do
 
+    # profile = Profile.new(account_id: params[:account_id], location: params[:location], pc: params[:pc], ps4: params[:ps4], xbo: params[:xbo], wiiu: params[:wiiu], ps3: params[:ps3], xb360: params[:xb360], wii: params[:wii], steam_id: params[:steam_tag], psn_id: params[:psn_tag], xbl_id: params[:xbl_tag]);
     profile = Profile.find_by(account_id: params[:account_id])
     profile.update(location: params[:location], pc: params[:pc], ps4: params[:ps4], xbo: params[:xbo], wiiu: params[:wiiu], ps3: params[:ps3], xb360: params[:xb360], wii: params[:wii], steam_id: params[:steam_tag], psn_id: params[:psn_tag], xbl_id: params[:xbl_tag])
     # profile.save
@@ -75,4 +79,18 @@ class ProfileController < ApplicationController
   end
 #------------------------------------------------------------------------------#
 
+get "/info" do
+  min = params[:total].to_i
+  max = min + 13
+  total = Profile.all.length
+  if min >= total
+    return {:done => true}.to_json
+  elsif
+    data = {:type => 'profiles', :data =>  Profile.where(:id => min..max)}
+    if params[:total].to_i != 0
+      sleep 0.2
+    end
+    return data.to_json
+  end
+end
 end

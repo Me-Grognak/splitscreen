@@ -27,7 +27,11 @@
     <div class='image-stats'>
       <div id='image-stat-likes' class='stat'>
         <div class='stat-icon'>
-          <i id='like-icon' class="fa fa-thumbs-up fa-2x" style='color: white;'></i>
+          <% if @check %>
+            <%= "<i id='like-icon' class='fa fa-thumbs-up fa-2x' style='color: rgb(35, 251, 30);'></i>" %>
+          <% else %>
+            <%= "<i id='like-icon' class='fa fa-thumbs-up fa-2x'></i>" %>
+          <% end %>
         </div>
         <div class='stat-print'>
           Likes: <span id='like-count'><%= @image.likes %></span>
@@ -84,7 +88,6 @@
     var left = 0;
     var top = 0;
     $('.marker-image-comment').hover(function(e) {
-      console.log('the fuck?');
       $(this).children().stop(true).show(400)
     }, function(e) {
       $(this).children().stop(true).hide(400);
@@ -107,6 +110,7 @@
         },
         dataType: 'json'
       });
+      $(this).off();
     });
 
 

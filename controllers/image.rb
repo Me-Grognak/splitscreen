@@ -6,12 +6,15 @@ post '/upload' do
     @message = "You need to be logged in to upload images!"
     return erb :upload
   end
+  tags = params[:tags]
+
   ext = File.extname(params["pic"][:filename])
   hex = SecureRandom.hex
   filepath = hex + ext
 
   #base = Base64.encode64(open(params["pic"][:tempfile]) { |io| io.read})
   pic = Account_Image.new
+  pic.tags = tags
   pic.image_path = filepath
   pic.user_name = session[:current_user].user_name
   pic.title = params[:title] || 'untitled'
@@ -25,21 +28,28 @@ post '/upload' do
 end
 #-------------------------------------------------------------------------------
 
-get '/more' do #sends additional pictures upon ajax request
+get '/more' do # sends additional pictures upon ajax request
   total = params.to_hash['total'].to_i
   max = Account_Image.all.length - total
   min = max - 11 #12
-  if min < 0 && max < 0
+  p "min: #{min} max: #{max}"
+  if min <= 0 && max <= 0
     return {:done => true}.to_json
   else
-    sleep 0.3
-    return Account_Image.where(:id => min..max).reverse.to_json
+    data = {:type => 'images', :data => Account_Image.where(:id => min..max).reverse}
+    if total != 0
+      sleep 0.2
+    end
+    return data.to_json
   end
 end
 
 
 get '/:id' do
   image = Account_Image.find_by(id: params[:id])
+  if authorization_check
+    @check = Image_Like.find_by(image_id: params[:id], user_name: session[:current_user].user_name)
+  end
   if image
     @image = image
     @comments = Image_Comment.where(image_id: params[:id])
@@ -72,9 +82,16 @@ end
 
 post '/liked' do
   if authorization_check
-    image = Account_Image.find_by(id: params[:id])
-    image.likes += 1
-    image.save
+    check = Image_Like.find_by(image_id: params[:id], user_name: session[:current_user].user_name)
+    if !check
+      image = Account_Image.find_by(id: params[:id])
+      image.likes += 1
+      image.save
+      like = Image_Like.new
+      like.image_id = params[:id]
+      like.user_name = session[:current_user].user_name
+      like.save
+    end
   else
     print "user not logged in!"
   end

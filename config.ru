@@ -7,6 +7,7 @@ require "./models/account"
 require "./models/profile"
 require "./models/comment"
 require "./models/image_comment"
+require "./models/image_like"
 
 require "./models/image"
 require "./controllers/image"
