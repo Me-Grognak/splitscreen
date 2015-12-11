@@ -8,6 +8,9 @@
     </div>
     <br>
     <form method='POST' action='/images/upload' enctype='multipart/form-data'>
+      <label>Set As Avatar: </label>
+      <input type="checkbox" name="avatar" value="true">
+      <br>
       <label for='title'>Image Title:</label>
       <input type='text' name='title' maxlength='50'>
       <div class='tags'>
@@ -38,6 +41,15 @@
 <script type='text/javascript'>
   var file = document.getElementById('upload-img');
   var namefile = document.getElementById('filename');
+  $('input[name="avatar"]').on('change', function() {
+    var state = $(this).prop('checked');
+    if (state) {
+      $('.tags').hide();
+    } else {
+      $('.tags').show();
+    }
+  });
+
   $('#add-tag').on('click', function(e) {
     var tag = $('#tag').val();
 

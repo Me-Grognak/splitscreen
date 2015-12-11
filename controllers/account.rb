@@ -5,7 +5,7 @@ class AccountController < ApplicationController
       self.set_logged("block")
       self.set_signup("none")
     end
-    @images = Account_Image.last(20).reverse
+    @images = Account_Image.last(16).reverse
     erb :index
   end
 
@@ -116,7 +116,7 @@ class AccountController < ApplicationController
 
 #Search Query "POST"-----------------------------------------------------------------
   post "/search" do
-    search_query = params[:search]
+    search_query = params[:search].downcase
     search_type = params[:type]
     data = {}
     if search_type == 'profiles'
@@ -138,8 +138,11 @@ class AccountController < ApplicationController
         end
         tags = image.tags.split(',')
         tags.each do |tag|
+          tag = tag.to_s.downcase
           check = /\b#{search_query}(.*)/.match(tag)
-          if tag.to_s == check.to_s
+          check = check.to_s.downcase
+          p "Tag: #{tag}, Check: #{check}"
+          if tag == check
             related_images.push(image)
             break
           end

@@ -22,6 +22,7 @@ class ProfileController < ApplicationController
       if does_user_exist(params[:user_name])
         @images = Account_Image.where(user_name: params[:user_name])
       end
+      @profile = Profile.find_by(user_name: @user_name)
       erb :profile
     end
   end

@@ -1,6 +1,6 @@
 <section class="pro_container">
   <div>
-    <div class="profile_img">
+    <div class="profile_img" style='background-image: url("/uploads/images/<%= @profile.avatar_path %>");'>
       <a href="/profile/edit_profile/<%= @user_name %>" id="edit-profile-link">Edit Profile</a>
       <div id="prof-img-foot">
         <p><%= params[:user_name] %></p>
