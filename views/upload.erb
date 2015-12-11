@@ -11,8 +11,14 @@
       <label for='title'>Image Title:</label>
       <input type='text' name='title' maxlength='50'>
       <div class='tags'>
-        <label for='game'>Game:</label>
-        <input type='text' name='game' maxlength='50'>
+        <label for='tag'>Add Tag: (Atleast 3 Characters)</label>
+        <input id='tag' type='text' maxlength='18'>
+        <input class='hidden' name='tags' type='text'>
+        <div id='add-tag'>
+          Add
+        </div>
+        <div id='added-tags'>
+        </div>
       </div>
       <div class='button-holder'>
         <div id='upload-img-wrapper'>
@@ -32,6 +38,21 @@
 <script type='text/javascript'>
   var file = document.getElementById('upload-img');
   var namefile = document.getElementById('filename');
+  $('#add-tag').on('click', function(e) {
+    var tag = $('#tag').val();
+
+    if (tag.length >= 3) {
+      var current_tags = $('input[name="tags"]').val();
+      if (!current_tags) {
+        current_tags = tag;
+      } else {
+        current_tags += ',' + tag;
+      }
+      $('input[name="tags"]').val(current_tags)
+      $('#tag').val('');
+      $('#added-tags').append('<div class="tag">' + tag + '</div>');
+    };
+  });
 
   file.addEventListener('change', function(e) {
     var filename = file.value.split("C:\\fakepath\\").join("");

@@ -38,6 +38,7 @@ class AccountController < ApplicationController
     p new_user
 
     new_profile = Profile.new(account_id: new_user.id, user_name: params[:user_name], location: nil, pc: nil, ps4: nil, xbo: nil, wiiu: nil, ps3: nil, xb360: nil, wii: nil, steam_id: nil, psn_id: nil, xbl_id: nil);
+
     new_profile.save
 
     p new_profile
@@ -110,6 +111,43 @@ class AccountController < ApplicationController
 #Upload "GET"-----------------------------------------------------------------
   get "/upload" do
     erb :upload
+  end
+#-------------------------------------------------------------------------------
+
+#Search Query "POST"-----------------------------------------------------------------
+  post "/search" do
+    search_query = params[:search]
+    search_type = params[:type]
+    data = {}
+    if search_type == 'profiles'
+      found_user = Profile.find_by(user_name: search_query)
+      if found_user
+        data = {:found => found_user}
+        return data.to_json
+      elsif
+        related_users = Profile.where("user_name SIMILAR TO ?", "#{search_query}%").limit(16)
+        data = {:type => 'profiles', :relations => related_users}
+        return data.to_json
+      end
+    elsif search_type == 'images' # TO DO: Make tags have their own table to increase performance.
+      images = Account_Image.all
+      related_images = []
+      images.each do |image|
+        if !image.tags
+          next
+        end
+        tags = image.tags.split(',')
+        tags.each do |tag|
+          check = /\b#{search_query}(.*)/.match(tag)
+          if tag.to_s == check.to_s
+            related_images.push(image)
+            break
+          end
+        end
+      end
+      data = {:type => 'images', :relations => related_images}
+      return data.to_json
+    end
   end
 #-------------------------------------------------------------------------------
 

@@ -20,6 +20,10 @@ a:hover {
   color: rgb(0, 169, 255);
 }
 
+.hidden {
+  display: none;
+}
+
 #user-anchor {
   text-decoration: none;
   font-size: 18px;
@@ -263,6 +267,46 @@ footer {
 
 .clear {
   clear: both;
+}
+
+#add-tag {
+  cursor: pointer;
+  float: left;
+  width: 10%;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  color: black;
+  background: rgb(110, 161, 208);
+}
+
+#tag {
+  float: left;
+  width: 90%;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+#added-tags {
+  margin-top: 10px;
+  height: 70px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  float: left;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background: rgb(252, 157, 45);
+  width: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 /*------------------------- GALLERY STYLING --------------------------------*/
