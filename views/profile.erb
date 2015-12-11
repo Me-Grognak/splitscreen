@@ -131,7 +131,7 @@ document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
     }, opts.delay || 17);
   }
 
-  window.onload = init();
+  // window.onload = init();
 //----------------------------------------------------------------------------//
 
 //----------------------- Load Profile Props ---------------------------------//
@@ -155,14 +155,10 @@ document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
         region.appendChild(city);
 
         // Set the user's gamertags
+        getSteam();
         var tags = document.getElementById('gamertags');
-        var steam = document.createElement('li');
         var psn = document.createElement('li');
         var xbl = document.createElement('li');
-        var steamid = "<%= session[:steam_id] %>";
-        console.log(steamid);
-        steam.innerHTML = "<strong>Steam:</strong><span id='steam'> " + output[0].steam_id + "</span>";
-        tags.appendChild(steam);
         psn.innerHTML = "<strong>PSN:</strong><span id='psn'> " + output[0].psn_id + "</span>";
         tags.appendChild(psn);
         xbl.innerHTML = "<strong>X-Box Live:</strong><span id='xbl'> " + output[0].xbl_id + "</span>";
@@ -208,6 +204,37 @@ document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
     };
     xhr.open('GET', "/profile/<%= @user_name %>/profile_props", true);
     xhr.send(null);
+
+    function getSteam() {
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        if (xhr.readyState !== XMLHttpRequest.DONE) {
+          return;
+        }
+        if (xhr.status == 200) {
+          var output = JSON.parse(xhr.responseText);
+          console.log(output);
+          var tags = document.getElementById('gamertags');
+          var steam = document.createElement('li');
+          if (output.response.players[0] == undefined) {
+            steam.innerHTML = "<strong>Steam:</strong><span id='steam'> N/A</span>";
+          } else {
+            console.log(output.response.players[0].personaname);
+            if (output.response.players[0].personastate == 1) {
+              steam.innerHTML = "<strong>Steam:</strong><span id='steam'> " + output.response.players[0].personaname + "</span>  <img class='status-icon' src='/imgs/online.ico'>";
+            } else {
+              steam.innerHTML = "<strong>Steam:</strong><span id='steam'> " + output.response.players[0].personaname + "</span>  <img class='status-icon' src='/imgs/offline.ico'>";
+            }
+          }
+          tags.appendChild(steam);
+        } else {
+          console.log("ERROR: " + xhr.status);
+        }
+      }
+      xhr.open("GET", "/profile/steam", true);
+      xhr.send(null);
+
+    }
 
   }
 

@@ -42,8 +42,12 @@ class ProfileController < ApplicationController
     @id = user.id
     @user_profile = Profile.where(account_id: @id)
     set_steam(@user_profile[0].steam_id)
-    p get_SteamProfile(session[:steam_id])
     return @user_profile.to_json
+  end
+
+  get "/steam" do
+    @steam_api = get_SteamProfile(session[:steam_id]).to_json
+    return @steam_api
   end
 
 #------------------------------------------------------------------------------#

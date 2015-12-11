@@ -40,9 +40,7 @@ class ApplicationController < Sinatra::Base
   end
 
   def get_SteamProfile(userid)
-    return JSON.parse(HTTP.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=94663FA38B7B685EE17033E7F15DEB48&steamids=" + userid.to_s))
-    ENV['steam_api_key']
-
+    return JSON.parse(HTTP.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + ENV['steam_api_key'] + "&steamids=" + userid.to_s))
   end
 
   ActiveRecord::Base.establish_connection(

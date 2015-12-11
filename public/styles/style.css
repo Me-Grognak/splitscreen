@@ -944,6 +944,14 @@ textarea {
     color: #00ff00;
   }
 
+  .status-icon {
+    margin: 0;
+    margin-bottom: -4px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+  }
+
 /*----------------------------------------------------------------------------*/
 
   .profile-comments {
