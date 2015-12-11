@@ -952,6 +952,28 @@ textarea {
     height: 20px;
   }
 
+  .online {
+    display: inline-block;
+    background-color: #00ff00;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    width:8px;
+    height:8px;
+}
+
+  .offline {
+    display: inline-block;
+    background-color: #ccc;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    width:8px;
+    height:8px;
+  }
+
 /*----------------------------------------------------------------------------*/
 
   .profile-comments {

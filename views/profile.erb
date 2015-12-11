@@ -221,9 +221,10 @@ document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
           } else {
             console.log(output.response.players[0].personaname);
             if (output.response.players[0].personastate == 1) {
-              steam.innerHTML = "<strong>Steam:</strong><span id='steam'> " + output.response.players[0].personaname + "</span>  <img class='status-icon' src='/imgs/online.ico'>";
+              steam.innerHTML = "<strong>Steam:</strong><span id='steam'> " + output.response.players[0].personaname + "</span>  <div class='online'></div>";
             } else {
-              steam.innerHTML = "<strong>Steam:</strong><span id='steam'> " + output.response.players[0].personaname + "</span>  <img class='status-icon' src='/imgs/offline.ico'>";
+              steam.innerHTML = "<strong>Steam:</strong><span id='steam'> " + output.response.players[0].personaname + "</span>  <div class='offline'></div>";
+              // <img class='status-icon' src='/imgs/offline.ico'>
             }
           }
           tags.appendChild(steam);
