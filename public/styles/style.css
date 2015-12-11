@@ -98,7 +98,6 @@ input[type="button"]:hover, [type="submit"]:hover {
   display: none;
   float: right;
   margin: 0 auto;
-  /*margin-top: 4px;*/
   margin-left: 4px;
   text-align: center;
   font-size: 14px;
@@ -111,7 +110,6 @@ input[type="button"]:hover, [type="submit"]:hover {
   height: 38px;
   padding: 0 30px;
   border-radius: 4px;
-  /*border: 1px solid #bbb;*/
   cursor: pointer;
   box-sizing: border-box;
   color: white;
@@ -756,7 +754,6 @@ textarea {
     height: 38px;
     padding: 0 30px;
     border-radius: 4px;
-    /*border: 1px solid #bbb;*/
     cursor: pointer;
     box-sizing: border-box;
     color: white;
@@ -780,14 +777,19 @@ textarea {
     height: 38px;
     padding: 0 30px;
     border-radius: 4px;
-    /*border: 1px solid #bbb;*/
     cursor: pointer;
     box-sizing: border-box;
     color: white;
   }
 }
 
-@media (min-width: 480px) {
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*                            Min-width 1080px                                */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+@media (min-width: 1080px) {
 
   #navbar {
     height: 40px;
@@ -805,9 +807,6 @@ textarea {
     display: inline-block;
   }
 
-}
-
-@media (min-width: 600px) {
   .pro_container {
     width: 90%;
     margin: 0 auto;
@@ -856,8 +855,8 @@ textarea {
 
   .slideshow {
     float: right;
-    width: 960px;
-    height: 500px;
+    width: 70%;
+    height: 400px;
     margin-top: 10px;
     background-color: white;
     border-radius: 10px;
@@ -900,7 +899,6 @@ textarea {
 
   .profile_props {
     width: 270px;
-    /*height: 610px;*/
     margin-left: 5px;
     margin-top: -10px;
     background-color: white;
@@ -911,7 +909,6 @@ textarea {
   }
 
   #props {
-    /*margin-left: 10px;*/
     padding: 10px;
     padding-bottom: 20px;
   }
@@ -961,7 +958,7 @@ textarea {
     border:1px solid #ccc;
     width:8px;
     height:8px;
-}
+  }
 
   .offline {
     display: inline-block;
@@ -979,14 +976,24 @@ textarea {
   .profile-comments {
     float: right;
     background-color: white;
-    width: 960px;
-    /*height: 610px;*/
+    width: 70%;
     overflow: auto;
     border-radius: 10px;
     margin-top: 30px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     padding-bottom: 20px;
+  }
+
+  .comment-post {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .comment-post textarea {
+    height: 100px;
+    width: 98%;
   }
 
   #posts-container span {
@@ -998,8 +1005,25 @@ textarea {
   }
 
   #posts-container a:hover {
-    /*text-decoration: underline;*/
     font-weight: 600;
+  }
+}
+
+
+/*--------------------------  Min-width 1382px -------------------------------*/
+@media (min-width: 1382px) {
+
+  #prof-img-foot p {
+    margin-right: 10px;
+  }
+
+  .slideshow {
+    width: 960px;
+    height: 500px;
+  }
+
+  .profile-comments {
+    width: 960px;
   }
 
 }
