@@ -7,18 +7,26 @@ post '/upload' do
     return erb :upload
   end
   tags = params[:tags]
+  user = session[:current_user].user_name
 
   ext = File.extname(params["pic"][:filename])
   hex = SecureRandom.hex
   filepath = hex + ext
 
   #base = Base64.encode64(open(params["pic"][:tempfile]) { |io| io.read})
-  pic = Account_Image.new
-  pic.tags = tags
-  pic.image_path = filepath
-  pic.user_name = session[:current_user].user_name
-  pic.title = params[:title] || 'untitled'
-  pic.save
+
+  if params[:avatar]
+    user_profile = Profile.find_by(user_name: user)
+    user_profile.avatar_path = filepath
+    user_profile.save
+  else
+    pic = Account_Image.new
+    pic.tags = tags
+    pic.image_path = filepath
+    pic.user_name = user
+    pic.title = params[:title] || 'untitled'
+    pic.save
+  end
 
   File.open('public/uploads/images/' + filepath, 'w') do |f|
     f.write(params['pic'][:tempfile].read)

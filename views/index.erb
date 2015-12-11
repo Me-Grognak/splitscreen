@@ -19,8 +19,8 @@
       <i class="fa fa-search fa-lg"></i> Search
     </div>
     <div class='search_selection'>
-      <input type='radio' name='search_type' data-type='images' value='/images/more' checked="checked"> Gallery
-      <input type='radio' name='search_type' data-type='profiles' value='/profile/info'> Profiles
+      <input type='radio' name='search_type' data-type='images' value='/images/more' checked="checked"> <label>Gallery</label>
+      <input type='radio' name='search_type' data-type='profiles' value='/profile/info'> <label for='search_type'>Profiles</label>
     </div>
   </div>
   <div class='clear'>
@@ -47,7 +47,7 @@
   document.getElementById('logout_btn').style.display = "<%= session[:logged] %>";
   document.getElementById('register_btn').style.display = "<%= session[:signup] %>";
   var client = {
-    total:  0
+    total:  16
   };
 
   $('#searchbar').on('keyup', function(e) {
