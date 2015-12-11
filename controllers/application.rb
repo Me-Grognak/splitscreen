@@ -29,6 +29,10 @@ class ApplicationController < Sinatra::Base
     session[:signup] = signup
   end
 
+  def set_steam(steam_id)
+    session[:steam_id] = steam_id
+  end
+
   def resets
     session[:message] = nil
     session[:logged] = nil
@@ -36,7 +40,7 @@ class ApplicationController < Sinatra::Base
   end
 
   def get_SteamProfile(userid)
-    return JSON.parse(HTTP.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + ENV['steam_api_key'] + "&steamids=76561197960435530"))
+    return JSON.parse(HTTP.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + ENV['steam_api_key'] + "&steamids=" + userid.to_s))
   end
 
   ActiveRecord::Base.establish_connection(

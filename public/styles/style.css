@@ -1011,7 +1011,7 @@ textarea {
   }
 
   #region, #gamertags, #platforms {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     text-align: center;
   }
@@ -1032,6 +1032,36 @@ textarea {
 
   #xbl {
     color: #00ff00;
+  }
+
+  .status-icon {
+    margin: 0;
+    margin-bottom: -4px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  .online {
+    display: inline-block;
+    background-color: #00ff00;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    width:8px;
+    height:8px;
+}
+
+  .offline {
+    display: inline-block;
+    background-color: #ccc;
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    width:8px;
+    height:8px;
   }
 
 /*----------------------------------------------------------------------------*/
