@@ -29,13 +29,14 @@ class ProfileController < ApplicationController
 
 #----------------------- For Posting Comments ---------------------------------#
 
-  post "/user/:user_name" do
+  #Post new comments received via AJAX
+  post "/comments" do
+    p @posts = JSON.parse(request.body.read)
 
-    new_comment = Comment.new(account_id: params[:account_id], poster_name: params[:poster_name], comment: params[:comment])
+    new_comment = Comment.new(account_id: @posts["account_id"], poster_name: @posts["poster_name"], comment: @posts["comment"], date_created: Time.now.strftime('%m/%d/%Y, %I:%M:%S %p'))
     new_comment.save
-
-    redirect "/profile/user/" + params[:user_name]
   end
+
 #------------------------------------------------------------------------------#
 #---------------------- AJAX profile properties -------------------------------#
 

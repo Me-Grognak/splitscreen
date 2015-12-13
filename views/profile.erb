@@ -38,7 +38,7 @@
     </div>
     <div class="profile-comments">
       <div id="form-container">
-        <form class="comment-post" action="/profile/user/<%= @user_name %>" method="post">
+        <form class="comment-post" action="/profile/comments" method="post">
           <input type="hidden" name="account_id" value="<%= @id %>">
           <input type="hidden" name="poster_name" value="<%= @poster_name %>">
           <textarea name="comment" rows="6" cols="40" placeholder="Post comments here..."></textarea>
@@ -46,6 +46,7 @@
         </form>
       </div>
       <div id="posts-container">
+        <!-- Month/Day/Year, Hour:Minute:Seconds AM/PM  -->
         <% @comments.each do |comment| %>
           <%= "<div class='posts'><p id='timestamp'>#{comment.date_created} - Posted by: <a href='/profile/user/#{comment.poster_name}'><span>#{comment.poster_name}</span></a></p><p id='comments'>#{comment.comment}</p><hr></div>" %>
         <% end %>
@@ -133,7 +134,7 @@ document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
     }, opts.delay || 17);
   }
 
-  window.onload = init();
+  // window.onload = init();
 //----------------------------------------------------------------------------//
 
 //----------------------- Load Profile Props ---------------------------------//
@@ -248,28 +249,69 @@ document.getElementById('edit-profile-link').style.display = "<%= @no_edit %>";
 //---------------------- Comment Poster (javascript) -------------------------//
 
 
+  var postButton = document.getElementById('post-btn');
+  postButton.addEventListener('click', function() {
 
-  // var postButton = document.getElementById('post-btn');
-  // postButton.addEventListener('submit', function() {
-  //   var posts = document.createElement('div');
-  //   posts.className = "posts";
-  //   var hr = document.createElement('hr');
-  //   posts.appendChild(hr);
-  //   var time = document.createElement('p');
-  //   time.id = "timestamp";
-  //   var date = new Date();
-  //   time.innerHTML = date.toLocaleString();
-  //   posts.appendChild(time);
-  //   var comment = document.createElement('p');
-  //   comment.id = "comments";
-  //   var formComments = document.getElementsByName('comment')[0].value;
-  //   comment.innerText = formComments;
-  //   posts.appendChild(comment);
-  //   posts.appendChild(hr);
-  //   var container = document.getElementById('posts-container');
-  //   container.appendChild(posts);
-  //   document.getElementsByName('comment')[0].value = "";
-  // });
+    event.preventDefault();
+
+    var posts = document.createElement('div');
+    posts.className = "posts";
+
+    var hr = document.createElement('hr');
+    posts.appendChild(hr);
+
+    var time = document.createElement('p');
+    time.id = "timestamp";
+
+    var date = new Date();
+    var poster = document.getElementsByName('poster_name')[0].value;
+    time.innerHTML = date.toLocaleString() + " - Posted by: <a href='/profile/user/" + poster + "'><span>" + poster + "</span></a>";
+    posts.appendChild(time);
+
+    var comment = document.createElement('p');
+    comment.id = "comments";
+
+    var formComments = document.getElementsByName('comment')[0].value;
+    comment.innerText = formComments;
+    posts.appendChild(comment);
+    posts.appendChild(hr);
+
+    var container = document.getElementById('posts-container');
+    container.insertBefore(posts, container.firstChild);
+
+
+    //---------------- AJAX new posts to database -----------------------//
+
+    comments = {
+      account_id: document.getElementsByName('account_id')[0].value,
+      poster_name: document.getElementsByName('poster_name')[0].value,
+      comment: document.getElementsByName('comment')[0].value
+    };
+
+    comments = JSON.stringify(comments);
+
+    console.log(comments);
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "/profile/comments", true);
+    xhr.onload = function() {
+      if (xhr.readyState != XMLHttpRequest.DONE) {
+        return;
+      }
+      if (xhr.status == 200) {
+        console.log("SUCCESS: " + xhr.statusText);
+      } else {
+        console.log("ERROR: " + xhr.statusText);
+      }
+    }
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(comments);
+
+    // Clear comment box
+    document.getElementsByName('comment')[0].value = "";
+
+  });
 
 //----------------------------------------------------------------------------//
 
